@@ -1,4 +1,4 @@
-# 🌿 TLE1 - Physical & Mental Health App
+# 🌿 TLE1 - Novara Health
 ℹ️ This is the repository of Team 7 that will be used during the development process of our Health App for TLE1.
 This file contains the rules we established for working together on this project.
 
