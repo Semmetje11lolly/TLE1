@@ -3,7 +3,10 @@
 This file contains the rules we established for working together on this project.
 
 ## 🧑‍💻 Coding Conventions
-[This will explain coding conventions]
+- We code in English (variables names etc.)
+- Variables should be declared at the top of the file (camelCase), except for function specific variables, like i in for-loops.
+- Keep the files organised in their respective folders, so JavaScript files go in js, CSS files go in css etc.
+- Give JS and CSS files the same name as the HTML/PHP file, eg: index.php has an index.css and index.js file.
 
 ## 😺 GitHub Rules
 - We use GitHub Desktop to pull, commit and push requests.
