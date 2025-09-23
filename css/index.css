@@ -14,7 +14,7 @@ nav {
 
     position: fixed;
     width: 100%;
-    height: 40px;
+    height: 45px;
     bottom: 0;
 
     font-size: 25px;
@@ -22,11 +22,21 @@ nav {
     background-color: var(--color-blue);
 }
 
+nav a {
+    all: unset;
+}
+
 nav .nav-button {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    font-size: 10px;
+}
+
+nav .nav-button i {
+    font-size: 20px;
 }
 
 .plus-icon {
@@ -37,7 +47,6 @@ nav .nav-button {
     transform: translateY(-10px);
 
     background-color: hsl(from var(--color-blue) h s calc(l - 5));
-    font-size: 32px;
 
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 

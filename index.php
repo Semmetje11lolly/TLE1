@@ -22,25 +22,9 @@
     Hey, [name]!
 </header>
 
-<nav>
-    <div class="nav-button">
-        <i class="fa-solid fa-house"></i>
-        Home
-    </div>
-    <div class="nav-button">
-        <i class="fa-solid fa-book"></i>
-        Diary
-    </div>
-    <div class="nav-button">
-        <i class="fa-solid fa-chart-simple"></i>
-        Insights
-    </div>
-    <span class="nav-button plus-icon"><b>+</b></span>
-    <div class="nav-button">
-        <i class="fa-solid fa-user"></i>
-        Account
-    </div>
-</nav>
+<?php
+include_once "includes/nav.php";
+?>
 
 </body>
 </html>
