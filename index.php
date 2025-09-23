@@ -24,7 +24,10 @@
 
 <main>
     <section class="step-counter">
-
+        <div class="step-background"></div>
+        <div class="step-progress"></div>
+        <span style="font-size: 55px; transform: translateY(-250px)">3067</span>
+        <span style="transform: translateY(-260px)">/6000</span>
     </section>
 </main>
 

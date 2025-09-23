@@ -31,10 +31,12 @@ body {
 
 h1, h2, h3 {
     font-family: "Space Mono", serif;
+    margin: 0;
 }
 
 h4, h5 {
     font-family: "Exo", serif;
+    margin: 0;
 }
 
 header {
