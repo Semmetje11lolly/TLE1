@@ -5,11 +5,12 @@
 }
 
 :root {
-    --color-background: #34252F;
-    --color-background-secondary: #3B5249;
-    --color-decorative: #519872;
-    --color-extra: #A4B494;
-    --color-text: #F1F1F1;
+    --color-white: #EEEEEE;
+    --color-black: #111111;
+    --color-blue: #9BBEC7;
+    --color-yellow: #FFB30F;
+    --color-pink: #FE938C;
+    --color-green: #BBDD95;
 }
 
 html {
@@ -18,9 +19,9 @@ html {
 
 body {
     /*font-family: "Poppins", serif;*/
-    color: var(--color-text);
+    color: var(--color-black);
 
-    background-color: var(--color-background);
+    background-color: var(--color-white);
 
     margin: 0;
 }
