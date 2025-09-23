@@ -1,8 +1,0 @@
-header {
-    display: flex;
-    justify-content: space-between;
-
-    font-size: 30px;
-
-    background-color: var(--color-blue);
-}

@@ -37,6 +37,15 @@ h4, h5 {
     font-family: "Exo", serif;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 30px;
+
+    background-color: var(--color-blue);
+}
+
 nav {
     display: flex;
     justify-content: space-around;

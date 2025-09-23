@@ -24,7 +24,7 @@
 
 <main>
     <section class="step-counter">
-        
+
     </section>
 </main>
 
