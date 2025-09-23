@@ -1,3 +1,7 @@
+main {
+    padding: 25px 0;
+}
+
 section.step-counter {
     display: flex;
     flex-direction: column;
