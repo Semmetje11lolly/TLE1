@@ -1,8 +1,8 @@
-<a href="#" class="nav-button">
+<a href="index.php" class="nav-button">
     <i class="fa-solid fa-house"></i>
     Home
 </a>
-<a href="#" class="nav-button">
+<a href="diary.php" class="nav-button">
     <i class="fa-solid fa-book"></i>
     Diary
 </a>
