@@ -22,9 +22,15 @@
     Hey, [name]!
 </header>
 
-<?php
-include_once "includes/nav.php";
-?>
+<main>
+
+</main>
+
+<nav>
+    <?php
+    include_once "includes/nav.php";
+    ?>
+</nav>
 
 </body>
 </html>
