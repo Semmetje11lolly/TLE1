@@ -9,7 +9,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script> <!-- Icon Library -->
     <link rel="stylesheet" href="css/style.css"> <!-- Global styling -->
     <link rel="stylesheet" href="css/index.css"> <!-- Page specific styling -->
     <title>Novara Health • Home</title>
@@ -23,10 +23,23 @@
 </header>
 
 <nav>
-    <i class="fa-solid fa-house"></i>
-    <i class="fa-solid fa-book"></i>
-    <i class="fa-solid fa-chart-simple"></i>
-    <i class="fa-solid fa-user"></i>
+    <div class="nav-button">
+        <i class="fa-solid fa-house"></i>
+        Home
+    </div>
+    <div class="nav-button">
+        <i class="fa-solid fa-book"></i>
+        Diary
+    </div>
+    <div class="nav-button">
+        <i class="fa-solid fa-chart-simple"></i>
+        Insights
+    </div>
+    <span class="nav-button plus-icon"><b>+</b></span>
+    <div class="nav-button">
+        <i class="fa-solid fa-user"></i>
+        Account
+    </div>
 </nav>
 
 </body>

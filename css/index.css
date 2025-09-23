@@ -21,3 +21,25 @@ nav {
 
     background-color: var(--color-blue);
 }
+
+nav .nav-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.plus-icon {
+    aspect-ratio: 1 / 1;
+    height: 125%;
+    text-align: center;
+    align-content: center;
+    transform: translateY(-10px);
+
+    background-color: hsl(from var(--color-blue) h s calc(l - 5));
+    font-size: 32px;
+
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+
+    border-radius: 50%;
+}
