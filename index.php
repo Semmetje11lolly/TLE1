@@ -23,7 +23,9 @@
 </header>
 
 <main>
-
+    <section class="step-counter">
+        
+    </section>
 </main>
 
 <nav>

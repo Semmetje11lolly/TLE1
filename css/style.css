@@ -36,3 +36,49 @@ h1, h2, h3 {
 h4, h5 {
     font-family: "Exo", serif;
 }
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    position: fixed;
+    width: 100%;
+    height: 45px;
+    bottom: 0;
+
+    font-size: 25px;
+
+    background-color: var(--color-blue);
+}
+
+nav a {
+    all: unset;
+}
+
+nav .nav-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 10px;
+}
+
+nav .nav-button i {
+    font-size: 20px;
+}
+
+.plus-icon {
+    aspect-ratio: 1 / 1;
+    height: 125%;
+    text-align: center;
+    align-content: center;
+    transform: translateY(-10px);
+
+    background-color: hsl(from var(--color-blue) h s calc(l - 5));
+
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+
+    border-radius: 50%;
+}
