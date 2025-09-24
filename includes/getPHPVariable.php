@@ -18,12 +18,14 @@ if ($_GET['type'] === 'diary') {
         http_response_code(418);
         echo json_encode(['error' => "Not found: dayID parameter is required"]);
     }
-    if (empty($acountID)) {
+    if (empty($accountID)) {
         http_response_code(418);
         echo json_encode(['error' => "Not found: accountID parameter is required"]);
     }
 
-    $query = "SELECT * from `diaries` WHERE `id` = $dayID AND `account_id` = $accountID";
+    $fullDate = date('Y-m') . '-' . $dayID;
+
+    $query = "SELECT * from `diaries` WHERE `date` = '$fullDate' AND `account_id` = $accountID";
 
     $result = mysqli_query($db, $query);
 
