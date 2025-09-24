@@ -28,8 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $row = mysqli_fetch_assoc($result);
 
             if (password_verify($inputPassword, $row['password'])) {
-                $_SESSION['loggedIn'] = true;
-                $_SESSION['email'] = $row['email'];
+                $_SESSION['user'] = $row['email'];
 
                 header("Location: index.php");
                 exit;
@@ -42,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 
 
 <!doctype html>
@@ -59,28 +57,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <div class="field">
-<h1> Log IN</h1>
+    <h1> Log IN</h1>
 
-<div class="login-container">
-    <form method="post" action="login.php">
-        <div>
-            <div class="control">
-                <input class="input" placeholder="Email" type="text" id="email" name="email">
-            </div>
+    <div class="login-container">
+        <form method="post" action="login.php">
+            <div>
+                <div class="control">
+                    <input class="input" placeholder="Email" type="text" id="email" name="email">
+                </div>
 
-            <div class="control">
-                <input class="input"  placeholder="password" type="password" id="password" name="password" required>
-            </div>
+                <div class="control">
+                    <input class="input" placeholder="password" type="password" id="password" name="password" required>
+                </div>
 
-        <div class="buttons">
-            <button class="button" type="submit">Log in</button>
-            <a href="register.php">Register</a>
-        </div>
+                <div class="buttons">
+                    <button class="button" type="submit">Log in</button>
+                    <a href="register.php">Register</a>
+                </div>
             </div>
-        </div>
+    </div>
     </form>
 
-    </div>
+</div>
 
 </body>
 </html>
