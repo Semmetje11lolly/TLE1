@@ -28,29 +28,68 @@
         <h2 class="form-category">Mood</h2>
         <div class="form-content">
             <div class="form-option">
-                <label class="label" for="one"><i class="fa-regular fa-face-angry"></i></label>
+                <label class="label-form" for="one"><i class="fa-regular fa-face-angry"></i></label>
                 <h4>Angry</h4>
                 <input class="input" id="one" type="checkbox" name="one" value="Option 1"/>
+                <span class="checkmark"></span>
             </div>
             <div class="form-option">
-                <label class="label" for="two"><i class="fa-regular fa-face-frown"></i></label>
+                <label class="label-form" for="two"><i class="fa-regular fa-face-frown"></i></label>
                 <h4>Sad</h4>
                 <input class="input" id="two" type="checkbox" name="two" value="Option 2"/>
+                <span class="checkmark"></span>
             </div>
             <div class="form-option">
-                <label class="label" for="three"><i class="fa-regular fa-face-meh-blank"></i></label>
+                <label class="label-form" for="three"><i class="fa-regular fa-face-meh-blank"></i></label>
                 <h4>Meh</h4>
                 <input class="input" id="three" type="checkbox" name="three" value="Option 3"/>
+                <span class="checkmark"></span>
             </div>
             <div class="form-option">
-                <label class="label" for="four"><i class="fa-regular fa-face-smile"></i></label>
+                <label class="label-form" for="four"><i class="fa-regular fa-face-smile"></i></label>
                 <h4>Good</h4>
                 <input class="input" id="four" type="checkbox" name="four" value="Option 4"/>
+                <span class="checkmark"></span>
             </div>
             <div class="form-option">
-                <label class="label" for="five"><i class="fa-regular fa-face-laugh-squint"></i></label>
+                <label class="label-form" for="five"><i class="fa-regular fa-face-laugh-squint"></i></label>
                 <h4>Happy</h4>
                 <input class="input" id="five" type="checkbox" name="five" value="Option 5"/>
+                <span class="checkmark"></span>
+            </div>
+        </div>
+
+        <h2 class="form-category">Energy</h2>
+        <div class="form-content">
+            <div class="form-option">
+                <label class="label-form" for="one"><i class="fa-solid fa-1"></i></label>
+                <h4>Low</h4>
+                <input class="input" id="one" type="checkbox" name="one" value="Option 1"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="two"><i class="fa-solid fa-2"></i></label>
+                <h4>Meh</h4>
+                <input class="input" id="two" type="checkbox" name="two" value="Option 2"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="three"><i class="fa-solid fa-3"></i></label>
+                <h4>Middle</h4>
+                <input class="input" id="three" type="checkbox" name="three" value="Option 3"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="four"><i class="fa-solid fa-4"></i></label>
+                <h4>Good</h4>
+                <input class="input" id="four" type="checkbox" name="four" value="Option 4"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="five"><i class="fa-solid fa-5"></i></label>
+                <h4>Full</h4>
+                <input class="input" id="five" type="checkbox" name="five" value="Option 5"/>
+                <span class="checkmark"></span>
             </div>
         </div>
     </form>
