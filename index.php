@@ -1,5 +1,7 @@
 <?php
-// PHP here
+require_once "./includes/logged.php";
+
+$username = $user_info['name'];
 ?>
 
 <!doctype html>
@@ -19,7 +21,7 @@
 <header>
     [Logo]
     <div class="empty-div"></div>
-    Hey, [name]!
+    Hey, <?= $username ?>!
 </header>
 
 <main>
@@ -31,7 +33,7 @@
         <span style="margin-top: -235px">You're halfway! Keep up the good work!</span>
     </section>
     <section class="mood-selector">
-        
+
     </section>
 </main>
 
