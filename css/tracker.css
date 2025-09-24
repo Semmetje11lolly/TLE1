@@ -1,13 +1,80 @@
-.form-group{
-    display: flex;
-    justify-content: center;
+*{
+    margin: 0;
 }
 
-.field{
-    display: block;
-    padding: 20px 20px;
-    border: 5px solid #000000;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 5px;
+main{
+    height: auto;
+    padding: 10px 0;
 }
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-category{
+    margin-left: 28px;
+}
+
+.form-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.form-option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+i{
+  font-size: 35px;
+}
+
+.fa-face-angry{
+    color: red;
+}
+
+.fa-face-frown{
+    color: orangered;
+}
+
+.fa-face-meh-blank{
+    color: yellow;
+}
+
+.fa-face-smile{
+    color: greenyellow;
+}
+
+.fa-face-laugh-squint{
+    color:darkgreen;
+}
+
+
+
+
+
+
+
+
+
+/*.form-field{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    !*justify-content: space-evenly;*!*/
+/*}*/
+
+/*.form-content-container{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*}*/
+
+/*.form-content{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*}*/

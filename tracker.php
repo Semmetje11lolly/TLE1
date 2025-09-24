@@ -1,5 +1,6 @@
 <?php
 // PHP here
+
 ?>
 
 <!doctype html>
@@ -22,50 +23,108 @@
 </header>
 
 <main>
-  <p>Hello World</p>
 
-    <section class="form-group">
-        <form action="" method="post">
-            <div class="field">
-                <p>Mood</p>
-
-                <label class="label" for="one">1</label>
-                <input class="input" id="one" type="checkbox" name="one" value="<?= $one ?>"/>
-
-                <label class="label" for="two">2</label>
-                <input class="input" id="two" type="checkbox" name="two" value="<?= $two ?>"/>
-
-                <label class="label" for="three">3</label>
-                <input class="input" id="three" type="checkbox" name="three" value="<?= $three ?>"/>
-
-                <label class="label" for="four">4</label>
-                <input class="input" id="four" type="checkbox" name="four" value="<?= $four ?>"/>
-
-                <label class="label" for="five">5</label>
-                <input class="input" id="five" type="checkbox" name="five" value="<?= $five ?>"/>
+    <form action="" method="post">
+        <h2 class="form-category">Mood</h2>
+        <div class="form-content">
+            <div class="form-option">
+                <label class="label" for="one"><i class="fa-regular fa-face-angry"></i></label>
+                <h4>Angry</h4>
+                <input class="input" id="one" type="checkbox" name="one" value="Option 1"/>
             </div>
+            <div class="form-option">
+                <label class="label" for="two"><i class="fa-regular fa-face-frown"></i></label>
+                <h4>Sad</h4>
+                <input class="input" id="two" type="checkbox" name="two" value="Option 2"/>
+            </div>
+            <div class="form-option">
+                <label class="label" for="three"><i class="fa-regular fa-face-meh-blank"></i></label>
+                <h4>Meh</h4>
+                <input class="input" id="three" type="checkbox" name="three" value="Option 3"/>
+            </div>
+            <div class="form-option">
+                <label class="label" for="four"><i class="fa-regular fa-face-smile"></i></label>
+                <h4>Good</h4>
+                <input class="input" id="four" type="checkbox" name="four" value="Option 4"/>
+            </div>
+            <div class="form-option">
+                <label class="label" for="five"><i class="fa-regular fa-face-laugh-squint"></i></label>
+                <h4>Happy</h4>
+                <input class="input" id="five" type="checkbox" name="five" value="Option 5"/>
+            </div>
+        </div>
+    </form>
 
-<!--            <div class="field">-->
-<!--                <p>energy</p>-->
-<!--                <label class="label" for="one">1</label>-->
-<!--                <input class="input" id="one" type="checkbox" name="one" value="--><?php //= $one ?><!--"/>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    <p>Hello World</p>-->
+<!--        <form action="" method="post">-->
 <!---->
-<!--                <label class="label" for="two">2</label>-->
-<!--                <input class="input" id="two" type="checkbox" name="two" value="--><?php //= $two ?><!--"/>-->
+<!--            <div class="form-field">-->
 <!---->
-<!--                <label class="label" for="three">3</label>-->
-<!--                <input class="input" id="three" type="checkbox" name="three" value="--><?php //= $three ?><!--"/>-->
+<!--                <div>-->
+<!--                   <p>Mood</p>-->
+<!--                </div>-->
 <!---->
-<!--                <label class="label" for="four">4</label>-->
-<!--                <input class="input" id="four" type="checkbox" name="four" value="--><?php //= $four ?><!--"/>-->
+<!--                <div class="form-content-container">-->
+<!--                    <div class="form-content">-->
+<!--                        <label class="label" for="one"><i class="fa-regular fa-face-angry"></i></label>-->
+<!--                        <input class="input" id="one" type="checkbox" name="one" value="--><?php //= $one ?><!--"/>-->
+<!--                    </div>-->
 <!---->
-<!--                <label class="label" for="five">5</label>-->
-<!--                <input class="input" id="five" type="checkbox" name="five" value="--><?php //= $five ?><!--"/>   -->
+<!--                    <div class="form-content">-->
+<!--                        <label class="label" for="two"><i class="fa-regular fa-face-frown"></i></label>-->
+<!--                        <input class="input" id="two" type="checkbox" name="two" value="--><?php //= $two ?><!--"/>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="form-content">-->
+<!--                        <label class="label" for="three"><i class="fa-regular fa-face-meh-blank"></i></label>-->
+<!--                        <input class="input" id="three" type="checkbox" name="three" value="--><?php //= $three ?><!--"/>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="form-content">-->
+<!--                        <label class="label" for="four"><i class="fa-regular fa-face-smile"></i></label>-->
+<!--                        <input class="input" id="four" type="checkbox" name="four" value="--><?php //= $four ?><!--"/>-->
+<!--                    </div>-->
+<!---->
+<!--                    <div class="form-content">-->
+<!--                        <label class="label" for="five"><i class="fa-regular fa-face-laugh-squint"></i></label>-->
+<!--                        <input class="input" id="five" type="checkbox" name="five" value="--><?php //= $five ?><!--"/>-->
+<!--                    </div>-->
+<!--                </div>-->
 <!--            </div>-->
-        </form>
-    </section>
-
-
+<!--        </form>-->
 </main>
 
 <nav>
