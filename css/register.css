@@ -1,0 +1,16 @@
+
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group{
+     display: flex;
+      align-items: center;
+      justify-content: center;
+     flex-direction: column;
+      background-color: #FE938C;
+
+ }

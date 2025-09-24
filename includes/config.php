@@ -1,7 +1,7 @@
 <?php
 
 //general settings
-$host       = '127.0.0.1';
+$host       = 'sql2.revivenode.com:3006';
 $database   = 's16135_healthapp';
 $user       = 'u16135_f4prHKcgXP';
 $password   = 'wh^i74s2+LSR=KYSTIH.X6=D';
