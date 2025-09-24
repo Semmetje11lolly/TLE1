@@ -1,4 +1,4 @@
-/* Reset */
+/* General reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +6,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #fff;
+
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -44,38 +43,46 @@ body::after {
     z-index: -1;
 }
 
-.container {
+.field {
     width: 100%;
-    max-width: 350px;
+    max-width: 81.397vw;
     text-align: center;
+
 }
 
-.container h1 {
+.field h1 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     font-weight: bold;
 }
 
-/* Form inputs */
-input[type="text"],
-input[type="password"] {
+/* Input styling */
+.input {
     width: 100%;
     padding: 14px;
     margin: 10px 0;
     border-radius: 12px;
     border: none;
-    background: #ffa726; /* orange */
+    background: #ffa726; /* orange background */
     color: #333;
     font-size: 1rem;
 }
 
-input::placeholder {
+.input::placeholder {
     color: #6e6e6e;
     opacity: 0.9;
 }
 
-/* Submit button */
-input[type="submit"] {
+/* Buttons container */
+.buttons {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Primary button */
+.button {
     background: #ff7b72; /* coral pink */
     border: none;
     padding: 12px;
@@ -85,46 +92,25 @@ input[type="submit"] {
     color: #000;
     font-weight: 500;
     transition: 0.3s;
-    margin-top: 15px;
-    width: 100%;
 }
 
-input[type="submit"]:hover {
+.button:hover {
     opacity: 0.85;
 }
 
-/* Back button (top left inside container) */
-.back-btn {
+/* Register link styled like a secondary button */
+.buttons a {
     display: inline-block;
-
-    margin-bottom: 20px;
-    padding: 8px 16px;
-    border: 2px solid #ff7b72;
+    padding: 10px;
     border-radius: 12px;
-    background: transparent;
+    border: 2px solid #ff7b72;
+    text-decoration: none;
     color: #000;
     font-weight: 500;
-    text-decoration: none;
     transition: 0.3s;
 }
 
-.container {
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
-    /* keep text center for inputs & heading */
-    text-align: center;
-}
-
-/* Special rule just for the back button inside container */
-.container .back-btn {
-    display: block;
-    text-align: center;
-    width: fit-content;
-    margin-left: 0;  /* stick to left */
-}
-
-.back-btn:hover {
+.buttons a:hover {
     background: #ff7b72;
     color: #fff;
 }

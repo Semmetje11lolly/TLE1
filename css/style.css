@@ -60,7 +60,7 @@ nav {
 
     font-size: 25px;
 
-    background-color: var(--color-blue);
+    background-color: var(--color-green);
 }
 
 nav a {
@@ -82,12 +82,15 @@ nav .nav-button i {
 
 .plus-icon {
     aspect-ratio: 1 / 1;
-    height: 125%;
+    height: calc(125% - 5px);
     text-align: center;
     align-content: center;
     transform: translateY(-10px);
 
-    background-color: hsl(from var(--color-blue) h s calc(l - 5));
+    background-color: var(--color-white); /*hsl(from var(--color-green) h s calc(l - 5));*/
+    color: hsl(from var(--color-green) h s calc(l - 20));
+
+    border: outset 5px hsl(from var(--color-green) h s calc(l - 10));
 
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 

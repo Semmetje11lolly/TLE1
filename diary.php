@@ -1,5 +1,11 @@
 <?php
+require_once "./includes/logged.php";
 
+$userID = $user_info['id'];
+
+//session_start();
+//
+//$_SESSION['user'] = '1097880@hr.nl';
 ?>
 
 <!doctype html>
@@ -13,17 +19,20 @@
     <script type="text/javascript" src="js/diary.js" defer></script>
     <link rel="stylesheet" href="css/style.css"> <!-- Global styling -->
     <link rel="stylesheet" href="css/diary.css"> <!-- Page specific styling -->
-    <title>Diary History</title>
+    <title>Novara Health - Diary</title>
 </head>
 <body>
     <header>
         [Logo]
     </header>
-    <main>
+    <main data-accountID="<?= $userID ?>">
         <h1 id="currentMonth"></h1>
         <div id="days"></div>
         <section id="calendar"></section>
     </main>
+    <dialog class="modal">
+        <div class="modalContent"></div>
+    </dialog>
     <nav>
         <?php
             include_once "includes/nav.php"
