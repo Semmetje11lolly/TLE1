@@ -30,6 +30,9 @@
         <span style="transform: translateY(-260px)">/6000 <i class="fa-solid fa-person-walking"></i></span>
         <span style="margin-top: -235px">You're halfway! Keep up the good work!</span>
     </section>
+    <section class="mood-selector">
+        
+    </section>
 </main>
 
 <nav>
