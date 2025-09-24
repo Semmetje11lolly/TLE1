@@ -6,7 +6,7 @@
     <i class="fa-solid fa-book"></i>
     Diary
 </a>
-<a href="#" class="nav-button plus-icon"><b style="font-size: 35px">+</b></a>
+<a href="tracker.php" class="nav-button plus-icon"><b style="font-size: 35px">+</b></a>
 <a href="#" class="nav-button">
     <i class="fa-solid fa-chart-simple"></i>
     Insights
