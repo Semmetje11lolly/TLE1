@@ -92,6 +92,90 @@
                 <span class="checkmark"></span>
             </div>
         </div>
+
+        <h2 class="form-category">Bad Habit</h2>
+        <div class="form-content">
+            <div class="form-option">
+                <label class="label-form" for="one"><i class="fa-solid fa-smoking"></i></label>
+                <h4>Smoking</h4>
+                <input class="input" id="one" type="checkbox" name="one" value="Option 1"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="two"><i class="fa-solid fa-hand-point-up"></i></label>
+                <h4>Nail Bitting</h4>
+                <input class="input" id="two" type="checkbox" name="two" value="Option 2"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="three"><i class="fa-solid fa-clock"></i></label>
+                <h4>Procrastinating</h4>
+                <input class="input" id="three" type="checkbox" name="three" value="Option 3"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="four"><i class="fa-solid fa-wine-glass"></i></label>
+                <h4>Alcohol</h4>
+                <input class="input" id="four" type="checkbox" name="four" value="Option 4"/>
+                <span class="checkmark"></span>
+            </div>
+        </div>
+
+        <h2 class="form-category">Hobbies</h2>
+        <div class="form-content">
+            <div class="form-option">
+                <label class="label-form" for="one"><i class="fa-solid fa-book-open-reader"></i></label>
+                <h4>Reading</h4>
+                <input class="input" id="one" type="checkbox" name="one" value="Option 1"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="two"><i class="fa-solid fa-gamepad"></i></label>
+                <h4>Gaming</h4>
+                <input class="input" id="two" type="checkbox" name="two" value="Option 2"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="three"><i class="fa-solid fa-music"></i></label>
+                <h4>Music</h4>
+                <input class="input" id="three" type="checkbox" name="three" value="Option 3"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="four"><i class="fa-solid fa-pen"></i></label>
+                <h4>Writing</h4>
+                <input class="input" id="four" type="checkbox" name="four" value="Option 4"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="five"><i class="fa-solid fa-video"></i></label>
+                <h4>Film</h4>
+                <input class="input" id="five" type="checkbox" name="five" value="Option 5"/>
+                <span class="checkmark"></span>
+            </div>
+        </div>
+
+        <h2 class="form-category">Social</h2>
+        <div class="form-content">
+            <div class="form-option">
+                <label class="label-form" for="one"><i class="fa-solid fa-people-roof"></i></label>
+                <h4>Family</h4>
+                <input class="input" id="one" type="checkbox" name="one" value="Option 1"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="two"><i class="fa-solid fa-people-group"></i></label>
+                <h4>Friends</h4>
+                <input class="input" id="two" type="checkbox" name="two" value="Option 2"/>
+                <span class="checkmark"></span>
+            </div>
+            <div class="form-option">
+                <label class="label-form" for="three"><i class="fa-solid fa-person"></i></label>
+                <h4>Alone</h4>
+                <input class="input" id="three" type="checkbox" name="three" value="Option 3"/>
+                <span class="checkmark"></span>
+            </div>
+        </div>
     </form>
 
 
