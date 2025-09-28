@@ -3,7 +3,7 @@
 }
 
 main{
-    height: 2000px;
+    height: 1610px;
     padding: 10px 0;
 }
 
@@ -23,6 +23,9 @@ form{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    border: 2px solid #BBDD95;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.5);
+    padding: 5px 0;
 }
 
 .form-option{
@@ -36,29 +39,28 @@ i{
   font-size: 35px;
 }
 
-.fa-face-angry{
-    color: red;
-}
+/*.fa-face-angry{*/
+/*    color: red;*/
+/*}*/
 
-.fa-face-frown{
-    color: orangered;
-}
+/*.fa-face-frown{*/
+/*    color: orangered;*/
+/*}*/
 
-.fa-face-meh-blank{
-    color: yellow;
-}
+/*.fa-face-meh-blank{*/
+/*    color: yellow;*/
+/*}*/
 
-.fa-face-smile{
-    color: greenyellow;
-}
+/*.fa-face-smile{*/
+/*    color: greenyellow;*/
+/*}*/
 
-.fa-face-laugh-squint{
-    color:darkgreen;
-}
+/*.fa-face-laugh-squint{*/
+/*    color:darkgreen;*/
+/*}*/
 
 .input{
     appearance: none;
-    accent-color: #4CAF50; /* green */
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -66,47 +68,48 @@ i{
     border-radius: 5px;
 }
 
-.input:hover {
-    border: 2px solid #BBDD95;
-    box-shadow: 0 0 4px rgba(76, 175, 80, 0.5);
-}
-
 .input:checked{
-    background-color: #BBDD95;
-    border-color: #BBDD95;
+    background-color: #FE938C;
+    border-color: #FE938C;
 }
 
 .input:checked::after {
-    /*content: "✔";*/
-    /*color: white;*/
-    /*font-size: 17px;*/
-    /*position: absolute;*/
-    /*top: -2px;*/
-    /*left: 3px;*/
-}
-h2 {
-    border-top: 2px solid #FFB30F;
-    width: 327px;
+    content: "✔";
+    color: black;
+    font-size: 17px;
 }
 
-.fa-1{
-    color: red;
-}
-.fa-2{
-    color: orangered;
-}
-
-.fa-3{
-    color: yellow;
-}
-
-.fa-4{
-    color: greenyellow;
+button{
+    margin-top: 20px;
+    background: #ff7b72; /* coral pink */
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #000;
+    font-weight: 500;
+    transition: 0.3s;
 }
 
-.fa-5{
-    color:darkgreen;
-}
+/*.fa-1{*/
+/*    color: red;*/
+/*}*/
+/*.fa-2{*/
+/*    color: orangered;*/
+/*}*/
+
+/*.fa-3{*/
+/*    color: yellow;*/
+/*}*/
+
+/*.fa-4{*/
+/*    color: greenyellow;*/
+/*}*/
+
+/*.fa-5{*/
+/*    color:darkgreen;*/
+/*}*/
 
 /*.fa-smoking{*/
 /*    color: red;*/
