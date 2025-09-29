@@ -34,16 +34,15 @@ function renderMonth() {
 
 function renderCalendar(year, month) {
     const days = document.getElementById("days");
+    calendar = document.getElementById("calendar");
+    days.innerHTML = ""; //Clear days above the calendar
+    calendar.innerHTML = ""; // Clear calendar
 
     for (let i = 0; i < daysOfTheWeek.length; i++) {
         let dayOfTheWeek = document.createElement("h2");
         dayOfTheWeek.innerText = daysOfTheWeek[i];
         days.appendChild(dayOfTheWeek)
     }
-
-    calendar = document.getElementById("calendar");
-    days.innerHTML = ""; //Clear days above the calendar
-    calendar.innerHTML = ""; // Clear calendar
 
     const date = new Date(year, month, 1);
     let firstDay = date.getDay();
@@ -134,8 +133,11 @@ function showModal(date) {
 
     const accountID = document.querySelector('main').dataset.accountid;
 
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+
     // Get current diary from database
-    fetch(`../includes/getPHPVariable.php?type=diary&dayID=${date}&accountID=${accountID}`)
+    fetch(`../includes/getPHPVariable.php?type=diary&dayID=${date}&month=${month}&year=${year}&accountID=${accountID}`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(response.statusText);

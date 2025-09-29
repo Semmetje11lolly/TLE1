@@ -12,6 +12,8 @@ header("Content-Type: application/json");
 
 if ($_GET['type'] === 'diary') {
     $dayID = $_GET['dayID'];
+    $month = $_GET['month'];
+    $year = $_GET['year'];
     $accountID = $_GET['accountID'];
 
     if (empty($dayID)) {
@@ -22,16 +24,25 @@ if ($_GET['type'] === 'diary') {
         http_response_code(418);
         echo json_encode(['error' => "Not found: accountID parameter is required"]);
     }
+    if (empty($year)) {
+        http_response_code(418);
+        echo json_encode(['error' => "Not found: year parameter is required"]);
+    }
+    if (empty($month)) {
+        http_response_code(418);
+        echo json_encode(['error' => "Not found: month parameter is required"]);
+    }
 
-    $fullDate = date('Y-m') . '-' . $dayID;
+    $month = str_pad($month, 2, "0", STR_PAD_LEFT);
+    $fullDate = "$year-$month-$dayID";
 
     $query = "SELECT * from `diaries` WHERE `date` = '$fullDate' AND `account_id` = $accountID";
-
     $result = mysqli_query($db, $query);
 
+    $diary = [];
     while ($row = mysqli_fetch_assoc($result)) {
         $diary[] = $row;
-    };
+    }
 
     echo json_encode($diary);
 } else if ($_GET['type'] === 'monthDiaries') {
