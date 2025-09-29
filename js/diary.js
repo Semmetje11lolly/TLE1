@@ -17,10 +17,15 @@ function init() {
 
     calendar.addEventListener('click', checkDate);
     modal.addEventListener('click', modalClickHandler);
+    //modal.addEventListener('close', )
+
+    document.getElementById("prevMonth").addEventListener("click", () => changeMonth(-1));
+    document.getElementById("nextMonth").addEventListener("click", () => changeMonth(1));
 }
 
 function renderMonth() {
     const currentMonth = document.getElementById("currentMonth");
+    currentMonth.innerHTML = ""; //Clear month name
     const monthName = today.toLocaleString('default', {month: 'long'});
     const monthTitle = document.createElement('h3');
     monthTitle.innerText = capitalizeFirstLetter(monthName);
@@ -37,6 +42,7 @@ function renderCalendar(year, month) {
     }
 
     calendar = document.getElementById("calendar");
+    days.innerHTML = ""; //Clear days above the calendar
     calendar.innerHTML = ""; // Clear calendar
 
     const date = new Date(year, month, 1);
@@ -90,6 +96,12 @@ function renderCalendar(year, month) {
         .catch(err => console.error("Fout bij ophalen monthDiaries:", err));
     }
 
+function changeMonth(offset) {
+    today.setMonth(today.getMonth() + offset);
+    renderMonth();
+    renderCalendar(today.getFullYear(), today.getMonth());
+}
+
 function checkDate(e) {
     e.preventDefault();
 
@@ -102,14 +114,21 @@ function checkDate(e) {
 function showModal(date) {
     modalContent.innerHTML = '';
 
+    const flexItems = document.createElement("div");
+    flexItems.classList.add('modal-flex');
+    modalContent.appendChild(flexItems);
+
     const title = document.createElement("h1");
-    modalContent.appendChild(title);
+    flexItems.appendChild(title);
+
+    const closeButton = document.createElement("button");
+    closeButton.classList.add('closeButton');
+    flexItems.appendChild(closeButton);
 
     const dataEntry = document.createElement("p");
     modalContent.appendChild(dataEntry);
 
     const image = document.createElement("img");
-    //img.src = //photo link
     image.alt = "Day's photo";
     modalContent.appendChild(image);
 
@@ -126,7 +145,12 @@ function showModal(date) {
         .then((data) => {
             // Get name from retrieved object (need to specify 0, as data is an array, but with
             // only one item, so we need the 'first' entry in the array.
-            title.innerText = data[0]['date'];
+            // Sets date (Year-month-day) into readable date (Day-month)
+            const dateObject = new Date(data[0]['date']);
+            const options = { day: 'numeric', month: 'long' };
+            const readableDate = dateObject.toLocaleDateString('nl-NL', options);
+
+            title.innerText = readableDate;
             dataEntry.innerText = data[0]['text'];
             image.src = "../" + data[0]['image_url'];
             let audioURL = data[0]['audio_url'];
@@ -136,7 +160,7 @@ function showModal(date) {
 }
 
 function modalClickHandler(e) {
-    if(e.target.nodeName === 'DIALOG') {
+    if(e.target.nodeName === 'DIALOG' || e.target.nodeName === 'BUTTON') {
         modal.close();
     }
 }
