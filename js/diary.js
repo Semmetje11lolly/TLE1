@@ -54,11 +54,41 @@ function renderCalendar(year, month) {
     for (let d = 1; d <= daysInMonth; d++) {
         const day = document.createElement("div");
         day.className = "day";
-        day.textContent = d;
         day.dataset.id = d;
+
+        const label = document.createElement("span");
+        label.className = "day-label";
+        label.textContent = d;
+        day.appendChild(label);
+
         calendar.appendChild(day);
     }
-}
+
+    const accountID = document.querySelector('main').dataset.accountid;
+
+    //Fetch data of image url, so that it can be loaded into the day's grid while the calendar is loading
+    fetch(`../includes/getPHPVariable.php?type=monthDiaries&accountID=${accountID}&year=${year}&month=${month + 1}`)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            data.forEach(entry => {
+                // Get day number and insert image url from that day
+                const dayNum = parseInt(entry.date.split("-")[2], 10);
+                const cell = calendar.querySelector(`.day[data-id='${dayNum}']`);
+                if (cell && entry.image_url) {
+                    cell.style.backgroundImage = `url("../${entry.image_url}")`;
+                    cell.style.backgroundSize = "cover";
+                    cell.style.backgroundPosition = "center";
+                    cell.classList.add("has-image");
+                }
+            });
+        })
+        .catch(err => console.error("Fout bij ophalen monthDiaries:", err));
+    }
 
 function checkDate(e) {
     e.preventDefault();
@@ -79,6 +109,7 @@ function showModal(date) {
     modalContent.appendChild(dataEntry);
 
     const image = document.createElement("img");
+    //img.src = //photo link
     image.alt = "Day's photo";
     modalContent.appendChild(image);
 
