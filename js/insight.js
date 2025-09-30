@@ -32,7 +32,7 @@ function fetchDataAndUpdate() {
                         animation: false,
                         responsive: true,
                         scales: {
-                            y: { beginAtZero: true }
+                            y: { beginAtZero: false }
                         }
                     }
                 });

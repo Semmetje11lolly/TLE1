@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     if (empty($errors)) {
         include_once 'includes/functions.php';
         $fileDestination = uploadImage();
-        $image = substr($fileDestination, 3);
+        $image = $fileDestination;
         $query = "
                     INSERT INTO diaries (account_id, date, image_url)
                     VALUES ($accountID,'$date', '$image')
@@ -32,6 +32,8 @@ if (isset($_POST['submit'])) {
                 UPDATE `insights`
                 SET `diary_id`='$last_id'
                 WHERE id = '$hiddenID'";
+
+        $result = mysqli_query($db, $query);
 
         mysqli_close($db);
 
