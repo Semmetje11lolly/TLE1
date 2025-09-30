@@ -67,6 +67,7 @@ if(isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register form</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png"> <!-- Tab icon -->
     <link rel="stylesheet" href="css/register.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animation.css">

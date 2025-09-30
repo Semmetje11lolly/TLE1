@@ -1,3 +1,11 @@
+header {
+    align-items: center;
+}
+
+header a {
+    color: #000;
+}
+
 main h1 {
     display: flex;
     justify-content: center;
@@ -18,3 +26,4 @@ main h1 {
     padding: 5px 35px;
     border-radius: 10px;
 }
+
