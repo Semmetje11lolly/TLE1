@@ -69,10 +69,24 @@ if(isset($_POST['submit'])) {
     <title>Register form</title>
     <link rel="stylesheet" href="css/register.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <script src="js/animation.js"></script>
 </head>
 
 
 <body>
+
+<!--animation-->
+
+
+<div class="container-animation">
+    <div class="logo" id="animatedLogo">
+        <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="40" fill="#4F46E5"/>
+            <text x="50" y="58" text-anchor="middle" fill="white" font-size="24" font-weight="bold">LOGO</text>
+        </svg>
+    </div>
+</div>
 
 <div class="container">
     <a href="login.php" class="back-btn">Back</a>
@@ -96,14 +110,16 @@ if(isset($_POST['submit'])) {
             </div>
 
 
-         <div >
+         <div>
          <input type="submit"  value="Register" name="submit">
          </div>
-         </
+
 
       </form>
 
       </div>
+
+
 
 </body>
 
