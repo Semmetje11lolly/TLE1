@@ -137,3 +137,12 @@ section.alreadyFilled div.buttons {
     background-color: var(--color-green);
     border-radius: 10px;
 }
+
+.insights-button {
+    all: unset;
+
+    padding: 10px 20px;
+
+    background-color: var(--color-blue);
+    border-radius: 10px;
+}

@@ -90,6 +90,8 @@ if (isset($_POST['submit'])) {
                 <a href="index.php" class="no-button">No</a>
                 <a href="includes/resettoday.php" class="yes-button">Yes</a>
             </div>
+            <br>or you can
+            <a href="insights.php" class="insights-button">Go to Insights</a>
         </section>
 
     <?php else : ?>
