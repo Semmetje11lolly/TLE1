@@ -1,7 +1,7 @@
 <?php
 function uploadImage()
 {
-    $uploadDir = "../user_content/img/";
+    $uploadDir = "/user_content/img/";
     $file = $_FILES['image'];
 
     // Validate the image file
