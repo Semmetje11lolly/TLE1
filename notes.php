@@ -20,8 +20,8 @@ if (isset($_POST['submit'])) {
         $fileDestination = uploadImage();
         $image = $fileDestination;
         $query = "
-                    INSERT INTO diaries (account_id, date, image_url)
-                    VALUES ($accountID,'$date', '$image')
+                    INSERT INTO diaries (account_id, text, date, image_url)
+                    VALUES ($accountID,'$note','$date', '$image')
                     ";
 
         $result = mysqli_query($db, $query);
@@ -36,6 +36,8 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($db, $query);
 
         mysqli_close($db);
+
+        // AI Generate Diary Page and updates diary table text column with the output.
 
         if ($result) {
             header('Location: insights.php');

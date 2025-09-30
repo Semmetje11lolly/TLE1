@@ -29,14 +29,17 @@ CONNECTOR - SYSTEM INTERFACE
 ================================================================================
 */
 
-class DiaryConnector {
+class DiaryConnector
+{
     // Connection to data loading
-    public static function connectToDataLoader($filePath) {
+    public static function connectToDataLoader($filePath)
+    {
         return json_decode(file_get_contents($filePath), true);
     }
 
     // Connection to response parser
-    public static function connectToResponseParser($markdownText) {
+    public static function connectToResponseParser($markdownText)
+    {
         $json = [
             'todaySummary' => '',
             'pastWeek' => '',
@@ -73,11 +76,10 @@ class DiaryConnector {
                 // Set new section
                 $section = strtolower(str_replace([' ', "'", 's'], '', $matches[1]));
                 $currentSection = ($section === 'todaysummary') ? 'todaySummary' :
-                                (($section === 'pastweek') ? 'pastWeek' :
-                                (($section === 'recurringbehavior') ? 'recurringBehaviors' : 'progressMarkers'));
+                    (($section === 'pastweek') ? 'pastWeek' :
+                        (($section === 'recurringbehavior') ? 'recurringBehaviors' : 'progressMarkers'));
                 $content = '';
-            }
-            // Handle progress markers specially
+            } // Handle progress markers specially
             elseif ($currentSection === 'progressMarkers') {
                 if (preg_match('/^✓\s*(.+)/', $line, $matches)) {
                     $json['progressMarkers']['positive'][] = trim($matches[1]);
@@ -91,8 +93,7 @@ class DiaryConnector {
                         $json['progressMarkers']['negative'][] = trim($line);
                     }
                 }
-            }
-            // Regular content
+            } // Regular content
             elseif ($currentSection && !preg_match('/^(Positive|Areas|Improvement)/', $line)) {
                 $content .= $line . ' ';
             }
@@ -129,22 +130,26 @@ BUILDING BLOCK - COMPONENT IMPLEMENTATION
 ================================================================================
 */
 
-class DiaryProcessor {
+class DiaryProcessor
+{
     private $testData;
     private $config;
 
-    public function __construct($testData, $props = []) {
+    public function __construct($testData, $props = [])
+    {
         $this->testData = $testData;
         $this->config = array_merge(DiaryProcessorConfig['defaults'], $props);
     }
-    
+
     // Veilige data extractie
-    private function safeGet($array, $key, $default = []) {
+    private function safeGet($array, $key, $default = [])
+    {
         return $array[$key] ?? $default;
     }
-    
+
     // Normalize activity names for consistency
-    private function normalizeActivities($activities) {
+    private function normalizeActivities($activities)
+    {
         $normalized = [];
         foreach ($activities as $activity) {
             // Normalize common variations
@@ -154,12 +159,13 @@ class DiaryProcessor {
         }
         return $normalized;
     }
-    
+
     // ============================================================================
     // PUBLIC INTERFACE - Component methods
     // ============================================================================
 
-    public function analyzeWeekPatterns() {
+    public function analyzeWeekPatterns()
+    {
         $patterns = [
             'badHabits' => [],
             'moodTrend' => [],
@@ -171,13 +177,13 @@ class DiaryProcessor {
         $totalSteps = 0;
         $validStepDays = 0;
         $moodDescriptions = $this->config['moodDescriptions'];
-        
+
         foreach ($this->testData as $index => $day) {
             // Track bad habits frequency
             foreach ($this->safeGet($day['activityTrackers'], 'badHabits', []) as $habit) {
                 $patterns['badHabits'][$habit] = ($patterns['badHabits'][$habit] ?? 0) + 1;
             }
-            
+
             // Track mood progression with descriptions
             $mood = $day['levelGraders']['mood'] ?? 3;
             $patterns['moodTrend'][] = [
@@ -188,7 +194,7 @@ class DiaryProcessor {
                 'activities' => $this->normalizeActivities($this->safeGet($day['activityTrackers'], 'activities', [])),
                 'notes' => $day['notes'] ?? ''
             ];
-            
+
             // Step tracking
             $dailySteps = $this->safeGet($day['activityTrackers'], 'dailySteps', []);
             if (isset($dailySteps['current'])) {
@@ -196,48 +202,49 @@ class DiaryProcessor {
                 $validStepDays++;
             }
         }
-        
+
         $patterns['stepsAvg'] = $validStepDays > 0 ? round($totalSteps / $validStepDays) : 0;
-        
+
         // Generate week narrative
         $patterns['weekNarrative'] = $this->generateWeekNarrative($patterns['moodTrend']);
-        
+
         // Detect recurring behavior patterns
         $patterns['behaviorPatterns'] = $this->detectBehaviorPatterns();
-        
+
         return $patterns;
     }
-    
+
     // Generate flowing narrative for the week
-    private function generateWeekNarrative($moodTrend) {
+    private function generateWeekNarrative($moodTrend)
+    {
         if (empty($moodTrend)) return "Past week data unavailable.";
-        
+
         $narrative = [];
         $firstDay = $moodTrend[0];
         $lastDay = end($moodTrend);
         $yesterday = count($moodTrend) > 1 ? $moodTrend[count($moodTrend) - 2] : $firstDay;
-        
+
         // Week start
         $weekStart = "This past week started " . ($firstDay['value'] >= 4 ? "strong feeling {$firstDay['description']}" : "feeling {$firstDay['description']}");
         if (!empty($firstDay['activities'])) {
             $weekStart .= " with " . implode(' and ', array_slice($firstDay['activities'], 0, 2));
         }
         $narrative[] = $weekStart . ".";
-        
+
         // Find and mention significant days (not just extremes)
         $significantDays = [];
-        
+
         // Always include highest and lowest if different from first/last
         $highestMood = max(array_column($moodTrend, 'value'));
         $lowestMood = min(array_column($moodTrend, 'value'));
-        
+
         foreach ($moodTrend as $index => $day) {
             // Skip first and last day (covered elsewhere)
             if ($index === 0 || $index === count($moodTrend) - 1) continue;
-            
+
             $isSignificant = false;
             $description = "";
-            
+
             // Extreme moods
             if ($day['value'] == $highestMood && $highestMood != $lowestMood) {
                 $description = "{$day['weekday']} was the peak feeling {$day['description']}";
@@ -251,11 +258,9 @@ class DiaryProcessor {
                     $description .= " - {$day['notes']}";
                 }
                 $isSignificant = true;
-            }
-            
-            // Important events based on notes
-            elseif (!empty($day['notes']) && 
-                   (strpos(strtolower($day['notes']), 'user testing') !== false ||
+            } // Important events based on notes
+            elseif (!empty($day['notes']) &&
+                (strpos(strtolower($day['notes']), 'user testing') !== false ||
                     strpos(strtolower($day['notes']), 'insights') !== false ||
                     strpos(strtolower($day['notes']), 'useful') !== false)) {
                 $description = "{$day['weekday']} brought useful progress despite feeling {$day['description']}";
@@ -264,15 +269,15 @@ class DiaryProcessor {
                 }
                 $isSignificant = true;
             }
-            
+
             if ($isSignificant) {
                 $significantDays[] = $description . ".";
             }
         }
-        
+
         // Add up to 2 most significant days
         $narrative = array_merge($narrative, array_slice($significantDays, 0, 2));
-        
+
         // Yesterday to today connection
         $connection = "On {$yesterday['weekday']} you were {$yesterday['description']}";
         if (!empty($yesterday['activities'])) {
@@ -280,18 +285,19 @@ class DiaryProcessor {
         }
         $connection .= ". Today you're {$lastDay['description']}";
         $narrative[] = $connection . ".";
-        
+
         return implode(' ', array_slice($narrative, 0, $this->config['maxNarrativeSentences']));
     }
 
     // Detect recurring behavior patterns
-    private function detectBehaviorPatterns() {
+    private function detectBehaviorPatterns()
+    {
         $patterns = [];
-        
+
         // Check post-alcohol smoking pattern
         $alcoholDays = [];
         $smokingDays = [];
-        
+
         foreach ($this->testData as $index => $day) {
             $badHabits = $this->safeGet($day['activityTrackers'], 'badHabits', []);
             if (in_array('alcohol', $badHabits)) {
@@ -301,7 +307,7 @@ class DiaryProcessor {
                 $smokingDays[] = $index;
             }
         }
-        
+
         // Check if smoking happens day after alcohol
         $postAlcoholSmoking = 0;
         foreach ($alcoholDays as $alcoholDay) {
@@ -309,100 +315,101 @@ class DiaryProcessor {
                 $postAlcoholSmoking++;
             }
         }
-        
+
         if ($postAlcoholSmoking > 0) {
             $patterns[] = "You smoke the day after drinking alcohol. This happened {$postAlcoholSmoking} time(s) this week.";
         }
-        
+
         // Recovery patterns (creative activities after bad days)
         $recoveryPattern = 0;
         for ($i = 1; $i < count($this->testData); $i++) {
-            $yesterday = $this->testData[$i-1];
+            $yesterday = $this->testData[$i - 1];
             $today = $this->testData[$i];
-            
-            if (($yesterday['levelGraders']['mood'] ?? 3) <= 2 && 
+
+            if (($yesterday['levelGraders']['mood'] ?? 3) <= 2 &&
                 array_intersect(['drawing', 'music', 'creative'], $this->safeGet($today['activityTrackers'], 'activities', []))) {
                 $recoveryPattern++;
             }
         }
-        
+
         if ($recoveryPattern > 0) {
             $patterns[] = "You engage in creative activities like drawing and music after low mood days. This happened {$recoveryPattern} time(s).";
         }
-        
+
         // Social isolation after parties/social activities
         $isolationPattern = 0;
         for ($i = 1; $i < count($this->testData); $i++) {
-            $yesterday = $this->testData[$i-1];
+            $yesterday = $this->testData[$i - 1];
             $today = $this->testData[$i];
-            
+
             // Check if yesterday had social/party activities (in socialActivity or badHabits for alcohol)
             $yesterdayBadHabits = $this->safeGet($yesterday['activityTrackers'], 'badHabits', []);
             $yesterdaySocial = $this->safeGet($yesterday['activityTrackers'], 'socialActivity', []);
-            
-            $hadSocialEvent = in_array('alcohol', $yesterdayBadHabits) || 
-                            array_intersect(['friends', 'party'], $yesterdaySocial);
-            
+
+            $hadSocialEvent = in_array('alcohol', $yesterdayBadHabits) ||
+                array_intersect(['friends', 'party'], $yesterdaySocial);
+
             $todayAlone = in_array('alone', $this->safeGet($today['activityTrackers'], 'socialActivity', []));
-            
+
             if ($hadSocialEvent && $todayAlone) {
                 $isolationPattern++;
             }
         }
-        
+
         if ($isolationPattern > 0) {
             $patterns[] = "You spend time alone after social activities or drinking. This pattern occurred {$isolationPattern} time(s).";
         }
-        
+
         // Procrastination before important events
         $procrastinationPattern = 0;
         for ($i = 0; $i < count($this->testData); $i++) {
             $day = $this->testData[$i];
             $badHabits = $this->safeGet($day['activityTrackers'], 'badHabits', []);
             $notes = strtolower($day['notes'] ?? '');
-            
-            if (in_array('procrastination', $badHabits) && 
-                (strpos($notes, 'sprint') !== false || strpos($notes, 'deadline') !== false || 
-                 strpos($notes, 'presentation') !== false || strpos($notes, 'preparation') !== false)) {
+
+            if (in_array('procrastination', $badHabits) &&
+                (strpos($notes, 'sprint') !== false || strpos($notes, 'deadline') !== false ||
+                    strpos($notes, 'presentation') !== false || strpos($notes, 'preparation') !== false)) {
                 $procrastinationPattern++;
             }
         }
-        
+
         if ($procrastinationPattern > 0) {
             $patterns[] = "You procrastinate before important deadlines or events. This occurred {$procrastinationPattern} time(s).";
         }
-        
+
         // Poor sleep after gaming
         $gamingSleepPattern = 0;
         foreach ($this->testData as $day) {
             $activities = $this->safeGet($day['activityTrackers'], 'activities', []);
             $sleep = $this->safeGet($day['activityTrackers'], 'sleep', '');
-            
-            if (array_intersect(['video games', 'gaming'], $activities) && 
+
+            if (array_intersect(['video games', 'gaming'], $activities) &&
                 strpos(strtolower($sleep), '6 or less') !== false) {
                 $gamingSleepPattern++;
             }
         }
-        
+
         if ($gamingSleepPattern > 0) {
             $patterns[] = "You get poor sleep (6 hours or less) on days when you game. This happened {$gamingSleepPattern} time(s).";
         }
-        
+
         return array_slice($patterns, 0, $this->config['maxBehaviorPatterns']);
     }
 
-    public function generatePrompt($lastDay) {
+    public function generatePrompt($lastDay)
+    {
         $weekPatterns = $this->analyzeWeekPatterns();
-        
+
         // Ensure we have the correct last day data (array pointer might be affected)
         $actualLastDay = end($this->testData);
-        
+
         // Today's data formatting
         $todayMood = $actualLastDay['levelGraders']['mood'] ?? 3;
         $todayEnergy = $actualLastDay['levelGraders']['energyLevel'] ?? 3;
         $moodDesc = $this->config['moodDescriptions'][$todayMood] ?? 'okay';
         $energyDesc = $this->config['energyDescriptions'][$todayEnergy] ?? 'medium';
-        
+
         $activities = implode(', ', $this->normalizeActivities($this->safeGet($actualLastDay['activityTrackers'], 'activities', [])));
         $locations = implode(', ', $this->safeGet($actualLastDay['activityTrackers'], 'locations', []));
         $social = implode(', ', $this->safeGet($actualLastDay['activityTrackers'], 'socialActivity', []));
@@ -411,12 +418,12 @@ class DiaryProcessor {
         $sleep = $this->safeGet($actualLastDay['activityTrackers'], 'sleep', '');
         $emotes = implode(', ', $this->safeGet($actualLastDay['activityTrackers'], 'emotes', []));
         $food = implode(', ', $this->safeGet($actualLastDay['activityTrackers'], 'food', []));
-        
+
         // Behavioral patterns text
-        $behaviorText = !empty($weekPatterns['behaviorPatterns']) 
-            ? implode(' ', $weekPatterns['behaviorPatterns']) 
+        $behaviorText = !empty($weekPatterns['behaviorPatterns'])
+            ? implode(' ', $weekPatterns['behaviorPatterns'])
             : 'No clear recurring patterns detected this week.';
-        
+
         $prompt = "Write a complete diary entry in English using second person (you did X, you felt Y). 
 
 TODAY ({$actualLastDay['date']}, {$actualLastDay['weekday']}):
@@ -544,7 +551,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Save JSON to database
         $jsonString = mysqli_real_escape_string($db, json_encode($diaryJson, JSON_UNESCAPED_UNICODE));
 
-        $insertQuery = "UPDATE `diaries` SET `text`='$jsonString'"
+        $insertQuery = "UPDATE `diaries` SET `text`='$jsonString'";
         $insertResult = mysqli_query($db, $insertQuery);
 
         if ($insertResult) {
@@ -558,3 +565,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     mysqli_close($db);
+}
