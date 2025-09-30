@@ -2,10 +2,6 @@
 require_once "./includes/logged.php";
 
 $userID = $user_info['id'];
-
-//session_start();
-//
-//$_SESSION['user'] = '1097880@hr.nl';
 ?>
 
 <!doctype html>

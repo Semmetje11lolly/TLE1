@@ -26,7 +26,7 @@ function init() {
 function renderMonth() {
     const currentMonth = document.getElementById("currentMonth");
     currentMonth.innerHTML = ""; //Clear month name
-    const monthName = today.toLocaleString('default', {month: 'long'});
+    const monthName = today.toLocaleString('en', {month: 'long'});
     const monthTitle = document.createElement('h3');
     monthTitle.innerText = capitalizeFirstLetter(monthName);
     currentMonth.appendChild(monthTitle);
@@ -150,7 +150,7 @@ function showModal(date) {
             // Sets date (Year-month-day) into readable date (Day-month)
             const dateObject = new Date(data[0]['date']);
             const options = { day: 'numeric', month: 'long' };
-            const readableDate = dateObject.toLocaleDateString('nl-NL', options);
+            const readableDate = dateObject.toLocaleDateString('en-US', options);
 
             title.innerText = readableDate;
             dataEntry.innerText = data[0]['text'];
