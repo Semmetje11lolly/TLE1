@@ -1,8 +1,21 @@
 #myChart{
     max-width: 400px;
-    max-height: 300px;
+    max-height: 400px;
+
+  padding-top: 20px;
+    /*padding-bottom: 20px;*/
 }
 
 .graph{
 }
 
+.feelings{
+   display: flex;
+    flex-direction: column;
+   align-items: center;
+}
+.summary{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -77,22 +77,44 @@ mysqli_close($db);
     </section>
 
     <section class="graph">
+        <canvas id="myChart" width="40" height="20"></canvas>
 
         <div class="feelings">
-            <p> diary note number: <?= $lastDiary['id'] ?></p>
-            <p> ur bad habits: <?= $lastDiary['bad_habit'] ?></p>
-            <p> ur hobbies: <?= $lastDiary['hobbies'] ?></p>
-            <p> ur social status: <?= $lastDiary['social'] ?></p>
-            <p> places you have been yesterday: <?= $lastDiary['location'] ?></p>
-            <p> food you ate last night: <?= $lastDiary['food'] ?></p>
-            <p> this is how much you slept: <?= $lastDiary['sleep'] ?></p>
-            <p> these were your emotions: <?= $lastDiary['emotions'] ?></p>
+            <h1>today’s feelings</h1>
+            <p>diary note number: <?= $lastDiary['id'] ?><br>
+             ur bad habits: <?= $lastDiary['bad_habit'] ?><br>
+             ur hobbies: <?= $lastDiary['hobbies'] ?><br>
+             ur social status: <?= $lastDiary['social'] ?><br>
+             places you have been yesterday: <?= $lastDiary['location'] ?><br>
+             food you ate last night: <?= $lastDiary['food'] ?><br>
+             this is how much you slept: <?= $lastDiary['sleep'] ?><br>
+             these were your emotions: <?= $lastDiary['emotions'] ?><br>
+            </p>
         </div>
-        <canvas id="myChart" width="40" height="20"></canvas>
+
     </section>
 
-<p>hi</p>
 
+    <section class="summary">
+        <h2>todays summary</h2>
+        <p>
+            You spent the day at home watching movies and series. Your mood was **sad** with energy at **very low**. You noted that the development sprint starts tomorrow and you haven’t prepared anything yet, so you binged Netflix to avoid stress.
+        </p>
+    </section>
+
+<!--    <section class="last-week">-->
+<!--        <h3>Past 7 days</h3>-->
+<!--        <p>-->
+<!--            The week began with you feeling okay while reading and listening to music. On Wednesday you felt sad when the GenAI prototype didn’t work as expected. After‑school drinks later that day escalated a bit. Thursday brought useful progress as you felt okay and completed productive user testing. Yesterday you were **very happy** while watching movies, series, and listening to music. Today you are sad again.-->
+<!--        </p>-->
+<!--    </section>-->
+<!---->
+<!--    <section class="recurring-behavior">-->
+<!--        <h4>recurring behavior</h4>-->
+<!--        <p>-->
+<!--            **Recurring Behaviors**    - You smoke the day after drinking alcohol; this occurred 1 time this week.    - You engage in creative activities like drawing and music after low‑mood days; this occurred 1 time.    - You spend time alone after social activities or drinking; this pattern occurred 3 times.    - You get poor sleep (6 hours or less) on days when you game; this happened 1 time.-->
+<!--        </p>-->
+<!--    </section>-->
 
 </main>
 
