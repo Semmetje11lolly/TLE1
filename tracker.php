@@ -50,6 +50,7 @@ if (isset($_POST['submit'])) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script> <!-- Icon Library -->
+    <link rel="icon" type="image/x-icon" href="/img/logo.png"> <!-- Tab icon -->
     <link rel="stylesheet" href="css/style.css"> <!-- Global styling -->
     <link rel="stylesheet" href="css/tracker.css"> <!-- Page specific styling -->
     <title>Novara Health • Home</title>
@@ -57,7 +58,7 @@ if (isset($_POST['submit'])) {
 <body>
 
 <header>
-    [Logo]
+    <img src="img/logo.png" alt="Logo">
     <div class="empty-div"></div>
 </header>
 

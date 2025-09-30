@@ -12,6 +12,7 @@ $userID = $user_info['id'];
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png"> <!-- Tab icon -->
     <script type="text/javascript" src="js/diary.js" defer></script>
     <link rel="stylesheet" href="css/style.css"> <!-- Global styling -->
     <link rel="stylesheet" href="css/diary.css"> <!-- Page specific styling -->
@@ -19,7 +20,7 @@ $userID = $user_info['id'];
 </head>
 <body>
     <header>
-        [Logo]
+        <img src="img/logo.png" alt="Logo">
     </header>
     <main data-accountID="<?= $userID ?>">
         <div id="monthNavigation">

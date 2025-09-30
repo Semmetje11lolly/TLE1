@@ -10,13 +10,15 @@ require_once "./includes/logged.php";
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png"> <!-- Tab icon -->
     <link rel="stylesheet" href="css/style.css"> <!-- Global styling -->
     <link rel="stylesheet" href="css/account.css"> <!-- Page specific styling -->
     <title>Novara Health - Account</title>
 </head>
 <body>
     <header>
-        [Logo]
+        <img src="img/logo.png" alt="Logo">
+        <a href="/includes/logout.php"><i class="fa-solid fa-right-from-bracket" style="margin-right: 5px"></i></a>
     </header>
     <main>
         <h1>Account Settings</h1>
