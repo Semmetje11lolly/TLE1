@@ -17,10 +17,15 @@ function init() {
 
     calendar.addEventListener('click', checkDate);
     modal.addEventListener('click', modalClickHandler);
+    //modal.addEventListener('close', )
+
+    document.getElementById("prevMonth").addEventListener("click", () => changeMonth(-1));
+    document.getElementById("nextMonth").addEventListener("click", () => changeMonth(1));
 }
 
 function renderMonth() {
     const currentMonth = document.getElementById("currentMonth");
+    currentMonth.innerHTML = ""; //Clear month name
     const monthName = today.toLocaleString('default', {month: 'long'});
     const monthTitle = document.createElement('h3');
     monthTitle.innerText = capitalizeFirstLetter(monthName);
@@ -29,15 +34,15 @@ function renderMonth() {
 
 function renderCalendar(year, month) {
     const days = document.getElementById("days");
+    calendar = document.getElementById("calendar");
+    days.innerHTML = ""; //Clear days above the calendar
+    calendar.innerHTML = ""; // Clear calendar
 
     for (let i = 0; i < daysOfTheWeek.length; i++) {
         let dayOfTheWeek = document.createElement("h2");
         dayOfTheWeek.innerText = daysOfTheWeek[i];
         days.appendChild(dayOfTheWeek)
     }
-
-    calendar = document.getElementById("calendar");
-    calendar.innerHTML = ""; // Clear calendar
 
     const date = new Date(year, month, 1);
     let firstDay = date.getDay();
@@ -54,10 +59,46 @@ function renderCalendar(year, month) {
     for (let d = 1; d <= daysInMonth; d++) {
         const day = document.createElement("div");
         day.className = "day";
-        day.textContent = d;
         day.dataset.id = d;
+
+        const label = document.createElement("span");
+        label.className = "day-label";
+        label.textContent = d;
+        day.appendChild(label);
+
         calendar.appendChild(day);
     }
+
+    const accountID = document.querySelector('main').dataset.accountid;
+
+    //Fetch data of image url, so that it can be loaded into the day's grid while the calendar is loading
+    fetch(`../includes/getPHPVariable.php?type=monthDiaries&accountID=${accountID}&year=${year}&month=${month + 1}`)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            data.forEach(entry => {
+                // Get day number and insert image url from that day
+                const dayNum = parseInt(entry.date.split("-")[2], 10);
+                const cell = calendar.querySelector(`.day[data-id='${dayNum}']`);
+                if (cell && entry.image_url) {
+                    cell.style.backgroundImage = `url("../${entry.image_url}")`;
+                    cell.style.backgroundSize = "cover";
+                    cell.style.backgroundPosition = "center";
+                    cell.classList.add("has-image");
+                }
+            });
+        })
+        .catch(err => console.error("Fout bij ophalen monthDiaries:", err));
+    }
+
+function changeMonth(offset) {
+    today.setMonth(today.getMonth() + offset);
+    renderMonth();
+    renderCalendar(today.getFullYear(), today.getMonth());
 }
 
 function checkDate(e) {
@@ -72,8 +113,16 @@ function checkDate(e) {
 function showModal(date) {
     modalContent.innerHTML = '';
 
+    const flexItems = document.createElement("div");
+    flexItems.classList.add('modal-flex');
+    modalContent.appendChild(flexItems);
+
     const title = document.createElement("h1");
-    modalContent.appendChild(title);
+    flexItems.appendChild(title);
+
+    const closeButton = document.createElement("button");
+    closeButton.classList.add('closeButton');
+    flexItems.appendChild(closeButton);
 
     const dataEntry = document.createElement("p");
     modalContent.appendChild(dataEntry);
@@ -84,8 +133,11 @@ function showModal(date) {
 
     const accountID = document.querySelector('main').dataset.accountid;
 
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+
     // Get current diary from database
-    fetch(`../includes/getPHPVariable.php?type=diary&dayID=${date}&accountID=${accountID}`)
+    fetch(`../includes/getPHPVariable.php?type=diary&dayID=${date}&month=${month}&year=${year}&accountID=${accountID}`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(response.statusText);
@@ -95,7 +147,12 @@ function showModal(date) {
         .then((data) => {
             // Get name from retrieved object (need to specify 0, as data is an array, but with
             // only one item, so we need the 'first' entry in the array.
-            title.innerText = data[0]['date'];
+            // Sets date (Year-month-day) into readable date (Day-month)
+            const dateObject = new Date(data[0]['date']);
+            const options = { day: 'numeric', month: 'long' };
+            const readableDate = dateObject.toLocaleDateString('nl-NL', options);
+
+            title.innerText = readableDate;
             dataEntry.innerText = data[0]['text'];
             image.src = "../" + data[0]['image_url'];
             let audioURL = data[0]['audio_url'];
@@ -105,7 +162,7 @@ function showModal(date) {
 }
 
 function modalClickHandler(e) {
-    if(e.target.nodeName === 'DIALOG') {
+    if(e.target.nodeName === 'DIALOG' || e.target.nodeName === 'BUTTON') {
         modal.close();
     }
 }

@@ -26,6 +26,13 @@ $userID = $user_info['id'];
         [Logo]
     </header>
     <main data-accountID="<?= $userID ?>">
+        <div id="monthNavigation">
+            <a id="prevMonth">&lt; Previous</a>
+            <span id="currentMonth"></span>
+            <a id="nextMonth">Next &gt;</a>
+        </div>
+        <div id="days"></div>
+        <div id="calendar"></div>
         <h1 id="currentMonth"></h1>
         <div id="days"></div>
         <section id="calendar"></section>
