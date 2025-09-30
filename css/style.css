@@ -42,10 +42,15 @@ h4, h5 {
 header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     font-size: 30px;
 
     background-color: var(--color-blue);
+}
+
+header img {
+    width: 15vw;
 }
 
 nav {

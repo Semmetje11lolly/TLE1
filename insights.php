@@ -52,6 +52,7 @@ mysqli_close($db);
     <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script> <!-- Icon Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/insight.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png"> <!-- Tab icon -->
     <link rel="stylesheet" href="css/style.css"> <!-- Global styling -->
     <link rel="stylesheet" href="css/index.css"> <!-- Page specific styling -->
     <link rel="stylesheet" href="css/insights.css">
@@ -60,7 +61,7 @@ mysqli_close($db);
 <body>
 
 <header>
-    [Logo]
+    <img src="img/logo.png" alt="Logo">
     <div class="empty-div"></div>
 
 </header>

@@ -1,7 +1,16 @@
 <?php
+/**
+ * OpenRouter API Configuration
+ *
+ * IMPORTANT: For security, set your API key in the .env file instead of hardcoding it here.
+ * This file provides fallback defaults when ConfigManager is not used.
+ *
+ * Recommended usage: Use ConfigManager::getInstance() instead of requiring this file directly.
+ */
+
 return [
-    'api_key' => getenv('OPENROUTER_API_KEY') ?: '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',
-    'model' => 'openai/gpt-oss-120b',  
-    'max_tokens' => 1000,
-    'temperature' => 0.7
+    'api_key' => getenv('OPENROUTER_API_KEY') ?: '',
+    'model' => getenv('OPENROUTER_MODEL') ?: 'openai/gpt-oss-120b',
+    'max_tokens' => (int)(getenv('OPENROUTER_MAX_TOKENS') ?: 1000),
+    'temperature' => (float)(getenv('OPENROUTER_TEMPERATURE') ?: 0.7)
 ];

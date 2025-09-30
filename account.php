@@ -1,7 +1,5 @@
 <?php
 require_once "./includes/logged.php";
-
-$userID = $user_info['id'];
 ?>
 
 <!doctype html>
@@ -13,30 +11,30 @@ $userID = $user_info['id'];
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="/img/logo.png"> <!-- Tab icon -->
-    <script type="text/javascript" src="js/diary.js" defer></script>
     <link rel="stylesheet" href="css/style.css"> <!-- Global styling -->
-    <link rel="stylesheet" href="css/diary.css"> <!-- Page specific styling -->
-    <title>Novara Health - Diary</title>
+    <link rel="stylesheet" href="css/account.css"> <!-- Page specific styling -->
+    <title>Novara Health - Account</title>
 </head>
 <body>
     <header>
         <img src="img/logo.png" alt="Logo">
+        <a href="/includes/logout.php"><i class="fa-solid fa-right-from-bracket" style="margin-right: 5px"></i></a>
     </header>
-    <main data-accountID="<?= $userID ?>">
-        <div id="monthNavigation">
-            <a id="prevMonth">&lt; Previous</a>
-            <span id="currentMonth"></span>
-            <a id="nextMonth">Next &gt;</a>
+    <main>
+        <h1>Account Settings</h1>
+        <div class="flex-items">
+            <p>Account Name: <?= $user_info['name'] ?></p>
+            <a href="#">Edit</a>
         </div>
-        <div id="days"></div>
-        <div id="calendar"></div>
-        <h1 id="currentMonth"></h1>
-        <div id="days"></div>
-        <section id="calendar"></section>
+        <div class="flex-items">
+            <p>Account Email: <?= $user_info['email'] ?></p>
+            <a href="#">Edit</a>
+        </div>
+        <div class="flex-items">
+            <p>Account Password: ***</p>
+            <a href="#">Edit</a>
+        </div>
     </main>
-    <dialog class="modal">
-        <div class="modalContent"></div>
-    </dialog>
     <nav>
         <?php
             include_once "includes/nav.php"
