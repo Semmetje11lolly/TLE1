@@ -39,26 +39,6 @@ i{
   font-size: 35px;
 }
 
-/*.fa-face-angry{*/
-/*    color: red;*/
-/*}*/
-
-/*.fa-face-frown{*/
-/*    color: orangered;*/
-/*}*/
-
-/*.fa-face-meh-blank{*/
-/*    color: yellow;*/
-/*}*/
-
-/*.fa-face-smile{*/
-/*    color: greenyellow;*/
-/*}*/
-
-/*.fa-face-laugh-squint{*/
-/*    color:darkgreen;*/
-/*}*/
-
 .input{
     appearance: none;
     width: 20px;
@@ -68,16 +48,36 @@ i{
     border-radius: 5px;
 }
 
-.input:checked{
-    background-color: #FE938C;
-    border-color: #FE938C;
-}
+/*.input:checked{*/
+/*    background-color: #FE938C;*/
+/*    border-color: #FE938C;*/
+/*}*/
 
 .input:checked::after {
     content: "✔";
     color: black;
     font-size: 17px;
 }
+
+.input-radio{
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #FE938C;
+    border-radius: 50%;
+}
+
+/*.input-radio:checked{*/
+
+/*}*/
+
+.input-radio:checked::after {
+    content: "✔";
+    color: black;
+    font-size: 17px;
+}
+
+
 
 button{
     margin-top: 20px;
@@ -92,60 +92,6 @@ button{
     transition: 0.3s;
 }
 
-/*.fa-1{*/
-/*    color: red;*/
-/*}*/
-/*.fa-2{*/
-/*    color: orangered;*/
-/*}*/
-
-/*.fa-3{*/
-/*    color: yellow;*/
-/*}*/
-
-/*.fa-4{*/
-/*    color: greenyellow;*/
-/*}*/
-
-/*.fa-5{*/
-/*    color:darkgreen;*/
-/*}*/
-
-/*.fa-smoking{*/
-/*    color: red;*/
-/*}*/
-
-/*.fa-hand-point-up{*/
-/*    color: red;*/
-/*}*/
-
-/*.fa-clock{*/
-/*    color: red;*/
-/*}*/
-
-/*.fa-wine-glass{*/
-/*    color: red;*/
-/*}*/
-
-/*.fa-book-open-reader{*/
-/*    color:darkgreen;*/
-/*}*/
-
-/*.fa-gamepad{*/
-/*    color:darkgreen;*/
-/*}*/
-
-/*.fa-music{*/
-/*    color:darkgreen;*/
-/*}*/
-
-/*.fa-pen{*/
-/*    color:darkgreen;*/
-/*}*/
-
-/*.fa-video{*/
-/*    color:darkgreen;*/
-/*}*/
 
 
 
