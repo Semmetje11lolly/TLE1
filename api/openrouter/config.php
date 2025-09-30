@@ -1,7 +1,7 @@
 <?php
 return [
-    'api_key' => getenv('OPENROUTER_API_KEY') ?: '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',
+    'api_key' => getenv('OPENROUTER_API_KEY') ?: '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',
     'model' => 'openai/gpt-oss-120b',  
     'max_tokens' => 1000,
-    'temperature' => 0.7
+    'temperature' => 0
 ];
