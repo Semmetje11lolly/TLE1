@@ -1,6 +1,6 @@
 <?php
 require_once 'api/openrouter/OpenRouterClient.php';
-$config = require 'api/openrouter/config.php';
+require_once 'api/openrouter/ConfigManager.php';
 
 /*
 ================================================================================
@@ -15,6 +15,10 @@ const DiaryProcessorConfig = [
         'maxNarrativeSentences' => 6,
         'maxBehaviorPatterns' => 4,
         'maxSignificantDays' => 2
+    ],
+    'api' => [
+        'max_tokens' => 1500,  // Diary needs more tokens than default
+        'temperature' => 0.3   // Lower temperature for consistent output
     ]
 ];
 
@@ -24,12 +28,7 @@ CONNECTOR - SYSTEM INTERFACE
 ================================================================================
 */
 
-class DiaryProcessorConnector {
-    // Connection to OpenRouter API
-    public static function connectToAPI($apiKey, $model) {
-        return new OpenRouterClient($apiKey, $model);
-    }
-
+class DiaryConnector {
     // Connection to data loading
     public static function connectToDataLoader($filePath) {
         return json_decode(file_get_contents($filePath), true);
@@ -120,11 +119,6 @@ class DiaryProcessorConnector {
         }
 
         return $json;
-    }
-
-    // Connection to config system
-    public static function connectToConfig() {
-        return require 'api/openrouter/config.php';
     }
 }
 
@@ -457,8 +451,11 @@ INITIALIZATION - Component Setup
 ================================================================================
 */
 
+// Get config manager
+$configManager = ConfigManager::getInstance();
+
 // Load test data using connector
-$testData = DiaryProcessorConnector::connectToDataLoader('api/openrouter/test-data.json');
+$testData = DiaryConnector::connectToDataLoader('api/openrouter/test-data.json');
 $lastDay = end($testData);
 $weekData = $testData; // For display in HTML
 
@@ -481,17 +478,20 @@ HTTP REQUEST HANDLING - Process diary generation requests
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Use connector to create API client
-        $client = DiaryProcessorConnector::connectToAPI($config['api_key'], $config['model']);
+        // Create API client using ConfigManager
+        $client = new OpenRouterClient(
+            $configManager->getApiKey(),
+            $configManager->getModel()
+        );
 
+        // Use diary-specific API settings
         $result = $client->chat([
             ['role' => 'system', 'content' => 'CRITICAL: Return raw JSON object starting with { and ending with }. NO other text, NO markdown headers, NO formatting. If you return anything except valid JSON, the system will fail. Include exactly 4-5 progressMarkers (2-3 positive, 2-3 negative).'],
             ['role' => 'user', 'content' => $prompt]
-        ], [
-            'max_tokens' => 1500,
-            'temperature' => 0.3,
-            'cache_control' => ['type' => 'ephemeral']
-        ]);
+        ], array_merge(
+            DiaryProcessorConfig['api'],
+            ['cache_control' => ['type' => 'ephemeral']]
+        ));
 
         $aiResponse = $result['choices'][0]['message']['content'];
 
@@ -510,7 +510,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $diaryJson = json_decode($fixedResponse, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 // Use connector's response parser as fallback
-                $convertedJson = DiaryProcessorConnector::connectToResponseParser($aiResponse);
+                $convertedJson = DiaryConnector::connectToResponseParser($aiResponse);
                 if ($convertedJson) {
                     $response = $convertedJson;
                 } else {
