@@ -2,3 +2,9 @@
 .idea/vcs.xml
 includes/config.php
 includes/env.php
+
+# Environment variables
+.env
+
+# OpenRouter config (contains API keys)
+api/openrouter/config.php

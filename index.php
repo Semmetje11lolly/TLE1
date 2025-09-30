@@ -1,6 +1,7 @@
 <?php
 require_once "./includes/logged.php";
 
+
 $username = $user_info['name'];
 ?>
 
