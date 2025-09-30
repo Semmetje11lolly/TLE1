@@ -78,7 +78,7 @@ if (isset($_POST['submit'])) {
             <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
             <input type="file" name="image" id="image" accept="image/*" required>
             <input type="hidden" id="insight_id" name="insight_id" value=<?= $hiddenID ?>>
-            <button type="submit" name="submit">Save</button
+            <button type="submit" name="submit">Save</button>
         </form>
     </section>
 
