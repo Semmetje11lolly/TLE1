@@ -7,7 +7,7 @@
     Diary
 </a>
 <a href="tracker.php" class="nav-button plus-icon"><b style="font-size: 35px">+</b></a>
-<a href="#" class="nav-button">
+<a href="insights.php" class="nav-button">
     <i class="fa-solid fa-chart-simple"></i>
     Insights
 </a>
