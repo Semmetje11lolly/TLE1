@@ -13,7 +13,6 @@ $foods = $_POST['food'] ?? [];
 $sleeps = $_POST['sleep'] ?? [];
 $emotions = $_POST['emotion'] ?? [];
 
-
 if (isset($_POST['submit'])) {
 
     $mood_str = implode(",", $moods);
@@ -33,13 +32,10 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($db, $query)
     or die('Error ' . mysqli_error($db) . ' with query ' . $query);
 
-    header('location: index.php');
+    header('location: notes.php');
 
     exit();
-
 }
-
-
 ?>
 
 <!doctype html>
@@ -69,27 +65,27 @@ if (isset($_POST['submit'])) {
             <div class="form-option">
                 <label class="label-form" for="angry"><i class="fa-regular fa-face-angry"></i></label>
                 <h4>Angry</h4>
-                <input class="input" id="angry" type="checkbox" name="mood[]" value="1"/>
+                <input class="input-radio" id="angry" type="radio" name="mood[]" value="1"/>
             </div>
             <div class="form-option">
                 <label class="label-form" for="sad"><i class="fa-regular fa-face-frown"></i></label>
                 <h4>Sad</h4>
-                <input class="input" id="sad" type="checkbox" name="mood[]" value="2"/>
+                <input class="input-radio" id="sad" type="radio" name="mood[]" value="2"/>
             </div>
             <div class="form-option">
                 <label class="label-form" for="meh"><i class="fa-regular fa-face-meh-blank"></i></label>
                 <h4>Meh</h4>
-                <input class="input" id="meh" type="checkbox" name="mood[]" value="3"/>
+                <input class="input-radio" id="meh" type="radio" name="mood[]" value="3"/>
             </div>
             <div class="form-option">
                 <label class="label-form" for="good"><i class="fa-regular fa-face-smile"></i></label>
                 <h4>Good</h4>
-                <input class="input" id="good" type="checkbox" name="mood[]" value="4"/>
+                <input class="input-radio" id="good" type="radio" name="mood[]" value="4"/>
             </div>
             <div class="form-option">
                 <label class="label-form" for="happy"><i class="fa-regular fa-face-laugh-squint"></i></label>
                 <h4>Happy</h4>
-                <input class="input" id="happy" type="checkbox" name="mood[]" value="5"/>
+                <input class="input-radio" id="happy" type="radio" name="mood[]" value="5"/>
             </div>
         </div>
 
@@ -98,27 +94,27 @@ if (isset($_POST['submit'])) {
             <div class="form-option">
                 <label class="label-form" for="low"><i class="fa-solid fa-1"></i></label>
                 <h4>Low</h4>
-                <input class="input" id="low" type="checkbox" name="energy[]" value="1"/>
+                <input class="input-radio" id="low" type="radio" name="energy[]" value="1"/>
             </div>
             <div class="form-option">
                 <label class="label-form" for="alright"><i class="fa-solid fa-2"></i></label>
                 <h4>Meh</h4>
-                <input class="input" id="alright" type="checkbox" name="energy[]" value="2"/>
+                <input class="input-radio" id="alright" type="radio" name="energy[]" value="2"/>
             </div>
             <div class="form-option">
                 <label class="label-form" for="middle"><i class="fa-solid fa-3"></i></label>
                 <h4>Middle</h4>
-                <input class="input" id="middle" type="checkbox" name="energy[]" value="3"/>
+                <input class="input-radio" id="middle" type="radio" name="energy[]" value="3"/>
             </div>
             <div class="form-option">
                 <label class="label-form" for="high"><i class="fa-solid fa-4"></i></label>
                 <h4>High</h4>
-                <input class="input" id="high" type="checkbox" name="energy[]" value="4"/>
+                <input class="input-radio" id="high" type="radio" name="energy[]" value="4"/>
             </div>
             <div class="form-option">
                 <label class="label-form" for="full"><i class="fa-solid fa-5"></i></label>
                 <h4>Full</h4>
-                <input class="input" id="full" type="checkbox" name="energy[]" value="5"/>
+                <input class="input-radio" id="full" type="radio" name="energy[]" value="5"/>
             </div>
         </div>
 
@@ -300,7 +296,7 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
 
-        <button type="submit" name="submit">Add to diary</button>
+        <button type="submit" name="submit">Next »</button>
     </form>
 </main>
 
