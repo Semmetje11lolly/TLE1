@@ -17,13 +17,13 @@ function fetchDataAndUpdate() {
                             {
                                 label: "Mood",
                                 data: moods,
-                                borderColor: "blue",
+                                borderColor: "#9BBEC7",
                                 fill: false
                             },
                             {
                                 label: "Energy",
                                 data: energy,
-                                borderColor: "red",
+                                borderColor: "#FE938C",
                                 fill: false
                             }
                         ]
