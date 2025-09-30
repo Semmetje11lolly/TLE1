@@ -1,6 +1,7 @@
 <?php
 require_once 'api/openrouter/OpenRouterClient.php';
 require_once 'api/openrouter/ConfigManager.php';
+require_once 'includes/config.php';
 
 /*
 ================================================================================
@@ -454,21 +455,42 @@ INITIALIZATION - Component Setup
 // Get config manager
 $configManager = ConfigManager::getInstance();
 
-// Load test data using connector
-$testData = DiaryConnector::connectToDataLoader('api/openrouter/test-data.json');
+// Load data from database instead of test file
+$query = "SELECT * FROM insights ORDER BY dates DESC LIMIT 7";
+$result = mysqli_query($db, $query);
+
+$testData = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    // Map database columns to test-data JSON structure
+    $dateObj = new DateTime($row['dates']);
+
+    $testData[] = [
+        'date' => $row['dates'],
+        'weekday' => $dateObj->format('l'),
+        'levelGraders' => [
+            'mood' => (int)$row['mood'],
+            'energyLevel' => (int)$row['energy']
+        ],
+        'activityTrackers' => [
+            'badHabits' => !empty($row['bad_habit']) ? explode(',', $row['bad_habit']) : [],
+            'activities' => !empty($row['hobbies']) ? explode(',', $row['hobbies']) : [],
+            'socialActivity' => !empty($row['social']) ? explode(',', $row['social']) : [],
+            'locations' => !empty($row['location']) ? explode(',', $row['location']) : [],
+            'food' => !empty($row['food']) ? explode(',', $row['food']) : [],
+            'sleep' => $row['sleep'] ?? '',
+            'emotes' => !empty($row['emotions']) ? explode(',', $row['emotions']) : []
+        ],
+        'notes' => $row['text'] ?? ''
+    ];
+}
+
+// Reverse to get chronological order (oldest to newest)
+$testData = array_reverse($testData);
 $lastDay = end($testData);
-$weekData = $testData; // For display in HTML
 
 // Create processor and generate prompt
 $processor = new DiaryProcessor($testData);
 $prompt = $processor->generatePrompt($lastDay);
-
-// Debug: Show week patterns and narrative
-$debugPatterns = $processor->analyzeWeekPatterns();
-$debugMode = isset($_GET['debug']) && $_GET['debug'] === '1';
-
-$response = '';
-$error = '';
 
 /*
 ================================================================================
@@ -512,218 +534,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Use connector's response parser as fallback
                 $convertedJson = DiaryConnector::connectToResponseParser($aiResponse);
                 if ($convertedJson) {
-                    $response = $convertedJson;
+                    $diaryJson = $convertedJson;
                 } else {
-                    $error = 'JSON Parse Error: ' . json_last_error_msg() . ' - Raw response: ' . substr($aiResponse, 0, 200) . '...';
-                    $response = $aiResponse; // Final fallback to raw response
+                    throw new Exception('JSON Parse Error: ' . json_last_error_msg());
                 }
-            } else {
-                $response = $diaryJson;
             }
+        }
+
+        // Save JSON to database
+        $jsonString = mysqli_real_escape_string($db, json_encode($diaryJson, JSON_UNESCAPED_UNICODE));
+
+        $insertQuery = "UPDATE `diaries` SET `text`='$jsonString'"
+        $insertResult = mysqli_query($db, $insertQuery);
+
+        if ($insertResult) {
+            echo "Diary successfully generated and saved to database.";
         } else {
-            $response = $diaryJson;
+            throw new Exception('Database insert failed: ' . mysqli_error($db));
         }
+
     } catch (Exception $e) {
-        $error = 'Error: ' . $e->getMessage();
+        echo 'Error: ' . $e->getMessage();
     }
-}
 
-/*
-================================================================================
-HTML TEMPLATE - User Interface
-================================================================================
-*/
-?>
-
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diary Generator Test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            border-bottom: 2px solid #4CAF50;
-            padding-bottom: 10px;
-        }
-        .test-data {
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-            border-left: 4px solid #4CAF50;
-        }
-        .test-data h3 {
-            margin-top: 0;
-            color: #555;
-        }
-        .test-data pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-size: 12px;
-        }
-        button {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 20px 0;
-        }
-        button:hover {
-            background: #45a049;
-        }
-        .output {
-            background: #fafafa;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            white-space: pre-wrap;
-            line-height: 1.6;
-        }
-        .diary-section {
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #4CAF50;
-        }
-        .diary-section h3 {
-            margin-top: 0;
-            color: #333;
-        }
-        .progress-marker {
-            margin: 5px 0;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-        .progress-positive {
-            background: #e8f5e8;
-            color: #2e7d32;
-        }
-        .progress-negative {
-            background: #ffebee;
-            color: #c62828;
-        }
-        .behavior-item {
-            margin: 8px 0;
-            padding: 8px;
-            background: #f5f5f5;
-            border-radius: 4px;
-        }
-        .error {
-            background: #fee;
-            color: #c00;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🗓️ Diary Generator Test</h1>
-        
-        <div class="test-data">
-            <h3>Test Data - Laatste Dag (<?php echo $lastDay['weekday'] . ', ' . $lastDay['date']; ?>)</h3>
-            <pre><?php echo json_encode($lastDay, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE); ?></pre>
-        </div>
-        
-        <div class="test-data">
-            <h3>Afgelopen Week Data (<?php echo count($weekData); ?> dagen)</h3>
-            <pre><?php echo json_encode($weekData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE); ?></pre>
-        </div>
-        
-        <?php if ($debugMode): ?>
-            <div class="test-data">
-                <h3>Debug: Week Narrative</h3>
-                <pre><?php echo htmlspecialchars($debugPatterns['weekNarrative']); ?></pre>
-                
-                <h3>Debug: Mood Trend</h3>
-                <pre><?php echo json_encode($debugPatterns['moodTrend'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE); ?></pre>
-                
-                <h3>Debug: Behavior Patterns</h3>
-                <pre><?php echo json_encode($debugPatterns['behaviorPatterns'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE); ?></pre>
-            </div>
-        <?php endif; ?>
-        
-        <form method="POST">
-            <button type="submit">Generate Diary Entry</button>
-            <a href="?debug=1" style="margin-left: 10px; color: #666;">Debug Mode</a>
-        </form>
-        
-        <?php if ($error): ?>
-            <div class="error"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
-        
-        <?php if ($response): ?>
-            <h2>Generated Diary Entry:</h2>
-            <?php if (is_array($response)): ?>
-                <!-- JSON formatted output -->
-                <div class="diary-section">
-                    <h3>Today's Summary</h3>
-                    <p><?php echo htmlspecialchars($response['todaySummary'] ?? 'Not available'); ?></p>
-                </div>
-                
-                <div class="diary-section">
-                    <h3>Past Week</h3>
-                    <p><?php echo htmlspecialchars($response['pastWeek'] ?? 'Not available'); ?></p>
-                </div>
-                
-                <div class="diary-section">
-                    <h3>Recurring Behaviors</h3>
-                    <?php if (!empty($response['recurringBehaviors'])): ?>
-                        <?php foreach ($response['recurringBehaviors'] as $behavior): ?>
-                            <div class="behavior-item"><?php echo htmlspecialchars($behavior); ?></div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <p>No recurring patterns detected.</p>
-                    <?php endif; ?>
-                </div>
-                
-                <div class="diary-section">
-                    <h3>Progress Markers</h3>
-                    <?php if (!empty($response['progressMarkers']['positive'])): ?>
-                        <h4>Positive Actions:</h4>
-                        <?php foreach ($response['progressMarkers']['positive'] as $positive): ?>
-                            <div class="progress-marker progress-positive">✓ <?php echo htmlspecialchars($positive); ?></div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    
-                    <?php if (!empty($response['progressMarkers']['negative'])): ?>
-                        <h4>Areas for Improvement:</h4>
-                        <?php foreach ($response['progressMarkers']['negative'] as $negative): ?>
-                            <div class="progress-marker progress-negative">✗ <?php echo htmlspecialchars($negative); ?></div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-                
-                <!-- Raw JSON for developers -->
-                <details style="margin-top: 20px;">
-                    <summary>Raw JSON Data (for developers)</summary>
-                    <pre style="background: #f0f0f0; padding: 10px; border-radius: 4px; overflow-x: auto;"><?php echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE); ?></pre>
-                </details>
-            <?php else: ?>
-                <!-- Fallback for non-JSON response -->
-                <div class="output"><?php echo nl2br(htmlspecialchars($response)); ?></div>
-            <?php endif; ?>
-        <?php endif; ?>
-    </div>
-</body>
-</html>
+    mysqli_close($db);
