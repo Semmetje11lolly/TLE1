@@ -466,6 +466,8 @@ $configManager = ConfigManager::getInstance();
 $query = "SELECT * FROM insights ORDER BY dates DESC LIMIT 7";
 $result = mysqli_query($db, $query);
 
+print_r($result);
+
 $testData = [];
 while ($row = mysqli_fetch_assoc($result)) {
     // Map database columns to test-data JSON structure
@@ -487,7 +489,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             'sleep' => $row['sleep'] ?? '',
             'emotes' => !empty($row['emotions']) ? explode(',', $row['emotions']) : []
         ],
-        'notes' => $row['text'] ?? ''
+        'notes' => $row['note'] ?? ''
     ];
 }
 
@@ -505,13 +507,15 @@ HTTP REQUEST HANDLING - Process diary generation requests
 ================================================================================
 */
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (true) {
     try {
         // Create API client using ConfigManager
         $client = new OpenRouterClient(
             $configManager->getApiKey(),
             $configManager->getModel()
         );
+
+        echo 'Generating response...';
 
         // Use diary-specific API settings
         $result = $client->chat([
@@ -550,8 +554,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Save JSON to database
         $jsonString = mysqli_real_escape_string($db, json_encode($diaryJson, JSON_UNESCAPED_UNICODE));
+        $today = date('Y-m-d');
 
-        $insertQuery = "UPDATE `diaries` SET `text`='$jsonString'";
+        $insertQuery = "UPDATE `diaries` SET `text`='$jsonString' WHERE `date` = '$today'";
         $insertResult = mysqli_query($db, $insertQuery);
 
         if ($insertResult) {
@@ -565,4 +570,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     mysqli_close($db);
+
+    header('location: insights.php');
 }
