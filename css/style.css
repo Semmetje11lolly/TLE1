@@ -101,3 +101,39 @@ nav .nav-button i {
 
     border-radius: 50%;
 }
+
+/*STYLING FOR TRACKER ALREADY FILLED IN SECTION*/
+
+section.alreadyFilled {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+section.alreadyFilled div.buttons {
+    display: flex;
+    gap: 20px;
+
+    padding: 20px;
+}
+
+.no-button {
+    all: unset;
+
+    padding: 10px 20px;
+
+    background-color: var(--color-pink);
+    border-radius: 10px;
+}
+
+.yes-button {
+    all: unset;
+
+    padding: 10px 20px;
+
+    background-color: var(--color-green);
+    border-radius: 10px;
+}

@@ -1,25 +1,25 @@
-*{
+* {
     margin: 0;
 }
 
-main{
-    height: 1610px;
+main {
+    /*height: 1610px;*/
     padding: 10px 0;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.form-category{
+.form-category {
     margin-left: 28px;
     margin-bottom: 5px;
     margin-top: 10px;
 }
 
-.form-content{
+.form-content {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -28,18 +28,18 @@ form{
     padding: 5px 0;
 }
 
-.form-option{
+.form-option {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
 }
 
-i{
-  font-size: 35px;
+i {
+    font-size: 35px;
 }
 
-.input{
+.input {
     appearance: none;
     width: 20px;
     height: 20px;
@@ -59,7 +59,7 @@ i{
     font-size: 17px;
 }
 
-.input-radio{
+.input-radio {
     appearance: none;
     width: 20px;
     height: 20px;
@@ -78,8 +78,7 @@ i{
 }
 
 
-
-button{
+button {
     margin-top: 20px;
     background: #ff7b72; /* coral pink */
     border: none;
@@ -90,6 +89,7 @@ button{
     color: #000;
     font-weight: 500;
     transition: 0.3s;
+    margin-bottom: 75px;
 }
 
 
