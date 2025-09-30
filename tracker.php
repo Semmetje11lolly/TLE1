@@ -24,15 +24,17 @@ if (isset($_POST['submit'])) {
     $food_str = implode(",", $foods);
     $sleep_str = implode(",", $sleeps);
     $emotion_str = implode(",", $emotions);
+    $dates = date('Y-m-d');
 
-    $query = "INSERT INTO insights (mood, energy, bad_habit, hobbies, social, location, food, sleep, emotions) 
-    VALUES ('$mood_str','$energy_str','$badHabit_str','$hobby_str','$social_str','$location_str','$food_str','$sleep_str','$emotion_str')";
+    $query = "INSERT INTO insights (mood, energy, bad_habit, hobbies, social, location, food, sleep, emotions, dates) 
+    VALUES ('$mood_str','$energy_str','$badHabit_str','$hobby_str','$social_str','$location_str','$food_str','$sleep_str','$emotion_str','$dates')";
 
 
     $result = mysqli_query($db, $query)
     or die('Error ' . mysqli_error($db) . ' with query ' . $query);
 
-    header('location: notes.php');
+    $last_id = mysqli_insert_id($db);
+    header("location: notes.php?id={$last_id}");
 
     exit();
 }
@@ -251,22 +253,27 @@ if (isset($_POST['submit'])) {
         <h2 class="form-category">Sleep</h2>
         <div class="form-content">
             <div class="form-option">
-                <label class="label-form" for="six-or-less-hours"><i class="fa-solid fa-minus"></i><i class="fa-solid fa-6"></i></label>
+                <label class="label-form" for="six-or-less-hours"><i class="fa-solid fa-minus"></i><i
+                            class="fa-solid fa-6"></i></label>
                 <h4>Hours</h4>
                 <input class="input" id="six-or-less-hours" type="checkbox" name="sleep[]" value="Six or less hours"/>
             </div>
             <div class="form-option">
-                <label class="label-form" for="six-to-seven-hours"><i class="fa-solid fa-6"></i><i class="fa-solid fa-slash"></i><i class="fa-solid fa-7"></i></label>
+                <label class="label-form" for="six-to-seven-hours"><i class="fa-solid fa-6"></i><i
+                            class="fa-solid fa-slash"></i><i class="fa-solid fa-7"></i></label>
                 <h4>Hours</h4>
                 <input class="input" id="six-to-seven-hours" type="checkbox" name="sleep[]" value="Six to seven hours"/>
             </div>
             <div class="form-option">
-                <label class="label-form" for="seven-to-eight-hours"><i class="fa-solid fa-7"></i><i class="fa-solid fa-slash"></i><i class="fa-solid fa-8"></i></label>
+                <label class="label-form" for="seven-to-eight-hours"><i class="fa-solid fa-7"></i><i
+                            class="fa-solid fa-slash"></i><i class="fa-solid fa-8"></i></label>
                 <h4>Hours</h4>
-                <input class="input" id="seven-to-eight-hours" type="checkbox" name="sleep[]" value="Seven to eight hours"/>
+                <input class="input" id="seven-to-eight-hours" type="checkbox" name="sleep[]"
+                       value="Seven to eight hours"/>
             </div>
             <div class="form-option">
-                <label class="label-form" for="eight-or-more"><i class="fa-solid fa-8"></i><i class="fa-solid fa-plus"></i></label>
+                <label class="label-form" for="eight-or-more"><i class="fa-solid fa-8"></i><i
+                            class="fa-solid fa-plus"></i></label>
                 <h4>Hours</h4>
                 <input class="input" id="eight-or-more" type="checkbox" name="sleep[]" value="Eight or more hours"/>
             </div>

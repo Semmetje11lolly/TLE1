@@ -1,7 +1,7 @@
 <?php
 function uploadImage()
 {
-    $uploadDir = "../user_content/uploads/images/";
+    $uploadDir = "../user_content/img/";
     $file = $_FILES['image'];
 
     // Validate the image file
@@ -15,7 +15,7 @@ function uploadImage()
         if ($file['error'] === 0) {
             if ($fileSize <= 10 * 1024 * 1024) { // 10MB max
                 // Create a unique name for the file
-                $newFileName = uniqid('product_', true) . '.' . pathinfo($fileName, PATHINFO_EXTENSION);
+                $newFileName = uniqid('diary_', true) . '.' . pathinfo($fileName, PATHINFO_EXTENSION);
                 $fileDestination = $uploadDir . $newFileName;
 
                 // Move the file to the upload directory
