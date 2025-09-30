@@ -5,6 +5,7 @@
 //
 // CURRENTLY, THE ONLY DATA THAT CAN BE RETRIEVED IS:
 // - A diary entry (based on account-id and calendar-day-id)
+// - Images (based on date)
 
 /** @var mysqli $db */
 require_once 'config.php';
