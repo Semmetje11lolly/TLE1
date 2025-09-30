@@ -20,8 +20,8 @@ if (isset($_POST['submit'])) {
         $fileDestination = uploadImage();
         $image = $fileDestination;
         $query = "
-                    INSERT INTO diaries (account_id, date, image_url)
-                    VALUES ($accountID,'$date', '$image')
+                    INSERT INTO diaries (account_id, note, date, image_url)
+                    VALUES ($accountID,'$note','$date', '$image')
                     ";
 
         $result = mysqli_query($db, $query);
@@ -37,8 +37,10 @@ if (isset($_POST['submit'])) {
 
         mysqli_close($db);
 
+        // AI Generate Diary Page and updates diary table text column with the output.
+
         if ($result) {
-            header('Location: insights.php');
+            header('Location: diary-generator.php');
             // Exit the code
             exit();
         }
@@ -55,6 +57,7 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://kit.fontawesome.com/1fe3729de2.js" crossorigin="anonymous"></script> <!-- Icon Library -->
     <script type="text/javascript" src="js/notes.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png"> <!-- Tab icon -->
     <link rel="stylesheet" href="css/style.css"> <!-- Global styling -->
     <link rel="stylesheet" href="css/notes.css"> <!-- Page specific styling -->
     <title>Novara Health • Notes</title>
@@ -62,12 +65,13 @@ if (isset($_POST['submit'])) {
 <body>
 
 <header>
-    [Logo]
+    <img src="img/logo.png" alt="Logo">
 </header>
 
 <main>
 
     <section class="form">
+        Hey, <?= $user_info['name'] ?>! Any additional thoughs about today?
         <i class="fa-solid fa-microphone" aria-hidden="true"></i>
         <form action="" method="post" enctype="multipart/form-data">
             <label for="textarea"></label>
