@@ -10,29 +10,36 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 require_once 'OpenRouterClient.php';
-$config = require 'config.php';
+require_once 'ConfigManager.php';
 
 try {
+    // Get config manager
+    $configManager = ConfigManager::getInstance();
+
     $input = json_decode(file_get_contents('php://input'), true);
-    
+
     if (!isset($input['message'])) {
         throw new Exception('Message required');
     }
-    
-    $client = new OpenRouterClient($config['api_key'], $config['model']);
-    
+
+    // Create client using ConfigManager
+    $client = new OpenRouterClient(
+        $configManager->getApiKey(),
+        $configManager->getModel()
+    );
+
     $response = $client->chat([
         ['role' => 'user', 'content' => $input['message']]
     ], [
-        'max_tokens' => $config['max_tokens'],
-        'temperature' => $config['temperature']
+        'max_tokens' => $configManager->getMaxTokens(),
+        'temperature' => $configManager->getTemperature()
     ]);
-    
+
     echo json_encode([
         'success' => true,
         'response' => $response['choices'][0]['message']['content']
     ]);
-    
+
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode([

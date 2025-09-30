@@ -79,7 +79,7 @@ dialog img {
 #prevMonth, #nextMonth {
     flex: 1;
     text-align: center;
-    background-color: var(--color-blue);
+    background-color: var(--color-yellow);
     border-radius: 10px;
     padding: 5px;
     margin: 0 10px;

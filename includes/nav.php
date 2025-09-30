@@ -11,7 +11,7 @@
     <i class="fa-solid fa-chart-simple"></i>
     Insights
 </a>
-<a href="#" class="nav-button">
+<a href="account.php" class="nav-button">
     <i class="fa-solid fa-user"></i>
     Account
 </a>

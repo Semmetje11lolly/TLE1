@@ -1,0 +1,128 @@
+[  
+  {  
+    "date": "2024-01-15",  
+    "weekday": "Monday",  
+    "levelGraders": {  
+      "mood": 3,  
+      "energyLevel": 4  
+    },  
+    "activityTrackers": {  
+      "badHabits": ["procrastination"],  
+      "activities": ["reading", "music"],  
+      "socialActivity": ["school", "friends"],  
+      "locations": ["home", "school"],  
+      "food": ["cooked", "no soda"],  
+      "sleep": "7-8 hours",  
+      "emotes": ["stressed", "bored"]  
+    },  
+    "notes": "First day of TLE project. Speculative Design session was interesting but lots of new info. Still figuring out team dynamics."  
+  },  
+  {  
+    "date": "2024-01-16",  
+    "weekday": "Tuesday",  
+    "levelGraders": {  
+      "mood": 4,  
+      "energyLevel": 3  
+    },  
+    "activityTrackers": {  
+      "badHabits": ["nail biting"],  
+      "activities": ["video games"],  
+      "socialActivity": ["school", "alone"],  
+      "locations": ["home", "school", "city"],  
+      "food": ["fast food"],  
+      "sleep": "6 or less",  
+      "emotes": ["relaxed"]  
+    },  
+    "notes": "Trend research went well, writing future scenario was fun. Went to bed too late because of gaming."  
+  },  
+  {  
+    "date": "2024-01-17",  
+    "weekday": "Wednesday",  
+    "levelGraders": {  
+      "mood": 2,  
+      "energyLevel": 2  
+    },  
+    "activityTrackers": {  
+      "badHabits": ["procrastination", "alcohol"],  
+      "activities": ["movies and series"],  
+      "socialActivity": ["friends", "party"],  
+      "locations": ["home", "city"],  
+      "food": ["fast food", "no snacks"],  
+      "sleep": "6 or less",  
+      "emotes": ["stressed", "insecure"]  
+    },  
+    "notes": "GenAI prototype didn't work as expected. After-school drinks escalated a bit."  
+  },  
+  {  
+    "date": "2024-01-18",  
+    "weekday": "Thursday",  
+    "levelGraders": {  
+      "mood": 3,  
+      "energyLevel": 3  
+    },  
+    "activityTrackers": {  
+      "badHabits": ["smoking"],  
+      "activities": ["drawing", "music"],  
+      "socialActivity": ["school", "alone"],  
+      "locations": ["school", "park"],  
+      "food": ["cooked", "no soda"],  
+      "sleep": "7-8 hours",  
+      "emotes": ["bored", "relaxed"]  
+    },  
+    "notes": "User testing outside was surprisingly useful. Gained many new insights. Hangover from yesterday."  
+  },  
+  {  
+    "date": "2024-01-19",  
+    "weekday": "Friday",  
+    "levelGraders": {  
+      "mood": 4,  
+      "energyLevel": 4  
+    },  
+    "activityTrackers": {  
+      "badHabits": ["procrastination"],  
+      "activities": ["reading", "video games"],  
+      "socialActivity": ["family", "friends"],  
+      "locations": ["home", "city", "park"],  
+      "food": ["restaurant"],  
+      "sleep": "8 hour or more",  
+      "emotes": ["relaxed"]  
+    },  
+    "notes": "No classes, nice to sleep in. Finished slides for week 1. Evening dinner out with family."  
+  },  
+  {  
+    "date": "2024-01-20",  
+    "weekday": "Saturday",  
+    "levelGraders": {  
+      "mood": 5,  
+      "energyLevel": 5  
+    },  
+    "activityTrackers": {  
+      "badHabits": ["alcohol"],  
+      "activities": ["movies/series", "music"],  
+      "socialActivity": ["friends", "party"],  
+      "locations": ["home", "city"],  
+      "food": ["fast food", "restaurant"],  
+      "sleep": "8 hour or more",  
+      "emotes": ["relaxed"]  
+    },  
+    "notes": "Free day! Festival in the city. Discussed prototype ideas with teammates during lunch."  
+  },  
+  {  
+    "date": "2024-01-21",  
+    "weekday": "Sunday",  
+    "levelGraders": {  
+      "mood": 2,  
+      "energyLevel": 1  
+    },  
+    "activityTrackers": {  
+      "badHabits": ["nail biting"],  
+      "activities": ["movies/series"],  
+      "socialActivity": ["alone"],  
+      "locations": ["home"],  
+      "food": ["cooked", "no snacks", "no soda"],  
+      "sleep": "6 or less",  
+      "emotes": ["stressed", "mad", "insecure"]  
+    },  
+    "notes": "Development sprint starts tomorrow. Haven't prepared anything yet. Netflix binging to avoid stress. Classic."  
+  }  
+]
