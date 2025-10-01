@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
 <main>
 
     <section class="form">
-        Hey, <?= $user_info['name'] ?>! Any additional thoughs about today?
+        Hey, <?= $user_info['name'] ?>! Any additional thoughts about today?
         <i class="fa-solid fa-microphone" aria-hidden="true"></i>
         <form action="" method="post" enctype="multipart/form-data">
             <label for="textarea"></label>

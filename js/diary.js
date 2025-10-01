@@ -93,7 +93,7 @@ function renderCalendar(year, month) {
             });
         })
         .catch(err => console.error("Fout bij ophalen monthDiaries:", err));
-    }
+}
 
 function changeMonth(offset) {
     today.setMonth(today.getMonth() + offset);
@@ -104,7 +104,7 @@ function changeMonth(offset) {
 function checkDate(e) {
     e.preventDefault();
 
-    if(e.target.classList.contains("day")) {
+    if (e.target.classList.contains("day")) {
         //Open dialog modal & send data from clicked item with
         showModal(e.target.dataset.id);
     }
@@ -124,8 +124,40 @@ function showModal(date) {
     closeButton.classList.add('closeButton');
     flexItems.appendChild(closeButton);
 
-    const dataEntry = document.createElement("p");
-    modalContent.appendChild(dataEntry);
+    const todayTitle = document.createElement("h2");
+    todayTitle.innerText = "📒Today's Summary";
+    modalContent.appendChild(todayTitle);
+
+    const todayText = document.createElement("p");
+    modalContent.appendChild(todayText);
+
+    const pastTitle = document.createElement("h2");
+    pastTitle.innerText = "📅Past Week";
+    modalContent.appendChild(pastTitle);
+
+    const pastText = document.createElement("p");
+    modalContent.appendChild(pastText);
+
+    const recurringTitle = document.createElement('h2');
+    recurringTitle.innerText = "🔄️Recurring Behaviors";
+    modalContent.appendChild(recurringTitle);
+
+    const recurringList = document.createElement('ul');
+    modalContent.appendChild(recurringList);
+
+    const progressTitle = document.createElement('h2');
+    progressTitle.innerText = "✅Progress Markers";
+    modalContent.appendChild(progressTitle);
+
+    const progressList = document.createElement('ul')
+    modalContent.appendChild(progressList);
+
+    const thoughtsTitle = document.createElement('h2');
+    thoughtsTitle.innerText = '🧠Your added thoughs';
+    modalContent.appendChild(thoughtsTitle);
+
+    const notes = document.createElement('p');
+    modalContent.appendChild(notes);
 
     const image = document.createElement("img");
     image.alt = "Day's photo";
@@ -149,11 +181,34 @@ function showModal(date) {
             // only one item, so we need the 'first' entry in the array.
             // Sets date (Year-month-day) into readable date (Day-month)
             const dateObject = new Date(data[0]['date']);
-            const options = { day: 'numeric', month: 'long' };
+            const options = {day: 'numeric', month: 'long'};
             const readableDate = dateObject.toLocaleDateString('en-US', options);
 
+            const jsonData = JSON.parse(data[0]["text"]);
+            console.log(jsonData);
+
             title.innerText = readableDate;
-            dataEntry.innerText = data[0]['text'];
+            todayText.innerText = jsonData["todaySummary"];
+            pastText.innerText = jsonData["pastWeek"];
+            jsonData['recurringBehaviors'].forEach((element, i) => {
+                const recurringElement = document.createElement('li')
+                recurringElement.innerText = jsonData['recurringBehaviors'][i];
+                recurringList.appendChild(recurringElement);
+            });
+            jsonData['progressMarkers']['positive'].forEach((element, i) => {
+                const progressElement = document.createElement('li')
+                progressElement.innerText = '✅' + jsonData['progressMarkers']['positive'][i];
+                progressElement.classList.add('positive-marker');
+                progressList.appendChild(progressElement);
+            });
+            jsonData['progressMarkers']['negative'].forEach((element, i) => {
+                const progressElement = document.createElement('li')
+                progressElement.innerText = '❌' + jsonData['progressMarkers']['negative'][i];
+                progressElement.classList.add('negative-marker');
+                progressList.appendChild(progressElement);
+            });
+
+            notes.innerText = data[0]['note'];
             image.src = "../" + data[0]['image_url'];
             let audioURL = data[0]['audio_url'];
             modal.showModal();
@@ -162,7 +217,7 @@ function showModal(date) {
 }
 
 function modalClickHandler(e) {
-    if(e.target.nodeName === 'DIALOG' || e.target.nodeName === 'BUTTON') {
+    if (e.target.nodeName === 'DIALOG' || e.target.nodeName === 'BUTTON') {
         modal.close();
     }
 }
