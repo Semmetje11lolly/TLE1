@@ -22,18 +22,23 @@ if (isset($_GET['json'])) {
     }
     $energyData = array_reverse($energyData);
 
+
+
     mysqli_close($db);
 
     // Return JSON instead of HTML
     header('Content-Type: application/json');
     echo json_encode([
         "mood"   => $moodData,
-        "energy" => $energyData
+        "energy" => $energyData,
     ]);
-    exit; // 🚨 stop execution here (no HTML printed)
+    exit;
 }
 
-// --- Normal page render (HTML) ---
+$querySummary = "SELECT text FROM diaries";
+$resultSummary = mysqli_query($db, $querySummary);
+$summary = mysqli_fetch_assoc($resultSummary);
+// all data query
 $query = "SELECT * FROM insights ORDER BY id DESC LIMIT 1";
 $result = mysqli_query($db, $query);
 $lastDiary = mysqli_fetch_assoc($result);
@@ -97,6 +102,10 @@ mysqli_close($db);
 
     <section class="summary">
         <h2>todays summary</h2>
+
+        <p>
+            <?= $summary['text'] ?>
+        </p>
         <p>
             You spent the day at home watching movies and series. Your mood was **sad** with energy at **very low**. You noted that the development sprint starts tomorrow and you haven’t prepared anything yet, so you binged Netflix to avoid stress.
         </p>
