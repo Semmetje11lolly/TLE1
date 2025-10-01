@@ -4,7 +4,7 @@ function fetchDataAndUpdate() {
     fetch("insights.php?json=1") // 👈 same file, but returns JSON
         .then(res => res.json())
         .then(data => {
-            const labels = data.mood.map(r => "Date: " + r.dates);
+            const labels = data.mood.map(r => r.dates.substring(5));
             const moods = data.mood.map(r => r.mood);
             const energy = data.energy.map(r => r.energy);
 
@@ -32,7 +32,7 @@ function fetchDataAndUpdate() {
                         animation: false,
                         responsive: true,
                         scales: {
-                            y: { beginAtZero: false }
+                            y: {beginAtZero: false}
                         }
                     }
                 });
