@@ -32,7 +32,13 @@ class ConfigManager {
             return;
         }
 
-        // Load .env file if it exists
+        // Load includes/env.php for API key and database config
+        $includesEnvPath = __DIR__ . '/../../includes/env.php';
+        if (file_exists($includesEnvPath)) {
+            require_once $includesEnvPath;
+        }
+
+        // Load .env file if it exists (for backwards compatibility)
         $envPath = __DIR__ . '/../../.env';
         if (file_exists($envPath)) {
             $this->loadEnvFile($envPath);
@@ -46,9 +52,9 @@ class ConfigManager {
             $fileConfig = [];
         }
 
-        // Merge with environment variables (env takes precedence)
+        // Merge with environment variables (priority: constant > env var > config file)
         $this->config = array_merge($fileConfig, array_filter([
-            'api_key' => getenv('OPENROUTER_API_KEY') ?: ($fileConfig['api_key'] ?? null),
+            'api_key' => (defined('OPENROUTER_API_KEY') ? OPENROUTER_API_KEY : null) ?: getenv('OPENROUTER_API_KEY') ?: ($fileConfig['api_key'] ?? null),
             'model' => getenv('OPENROUTER_MODEL') ?: ($fileConfig['model'] ?? 'openai/gpt-4o-mini'),
             'max_tokens' => (int)(getenv('OPENROUTER_MAX_TOKENS') ?: ($fileConfig['max_tokens'] ?? 1000)),
             'temperature' => (float)(getenv('OPENROUTER_TEMPERATURE') ?: ($fileConfig['temperature'] ?? 0.7))
