@@ -54,11 +54,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="icon" type="image/x-icon" href="/img/logo.png"> <!-- Tab icon -->
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <script src="js/animation.js"></script>
 </head>
 <body>
 
 <div class="field">
     <h1> Log IN</h1>
+    <!--animation-->
+
+
+    <div class="container-animation">
+        <div class="logo" id="animatedLogo">
+            <img src="img/logo.png" alt="Logo">
+        </div>
+    </div>
 
     <div class="login-container">
         <form method="post" action="login.php">
