@@ -21,7 +21,7 @@ if (isset($results[0])) {
 }
 
 // Tracker stuff
-$moods = $_POST['mood'] ?? [];
+$moods = $_POST['mood'] ?? [0 => ''];
 $energies = $_POST['energy'] ?? [];
 $badHabits = $_POST['bad_habit'] ?? [];
 $hobbies = $_POST['hobby'] ?? [];
@@ -105,27 +105,32 @@ if (isset($_POST['submit'])) {
                 <div class="form-option">
                     <label class="label-form" for="angry"><i class="fa-regular fa-face-angry"></i></label>
                     <h4>Angry</h4>
-                    <input class="input-radio" id="angry" type="radio" name="mood[]" value="1"/>
+                    <input class="input-radio" id="angry" type="radio" name="mood[]" value="1"
+                           <?php if ($moods[0] == 1) : ?>checked<?php endif; ?>/>
                 </div>
                 <div class="form-option">
                     <label class="label-form" for="sad"><i class="fa-regular fa-face-frown"></i></label>
                     <h4>Sad</h4>
-                    <input class="input-radio" id="sad" type="radio" name="mood[]" value="2"/>
+                    <input class="input-radio" id="sad" type="radio" name="mood[]" value="2"
+                           <?php if ($moods[0] == 2) : ?>checked<?php endif; ?>/>
                 </div>
                 <div class="form-option">
                     <label class="label-form" for="meh"><i class="fa-regular fa-face-meh-blank"></i></label>
                     <h4>Meh</h4>
-                    <input class="input-radio" id="meh" type="radio" name="mood[]" value="3"/>
+                    <input class="input-radio" id="meh" type="radio" name="mood[]" value="3"
+                           <?php if ($moods[0] == 3) : ?>checked<?php endif; ?>/>
                 </div>
                 <div class="form-option">
                     <label class="label-form" for="good"><i class="fa-regular fa-face-smile"></i></label>
                     <h4>Good</h4>
-                    <input class="input-radio" id="good" type="radio" name="mood[]" value="4"/>
+                    <input class="input-radio" id="good" type="radio" name="mood[]" value="4"
+                           <?php if ($moods[0] == 4) : ?>checked<?php endif; ?>/>
                 </div>
                 <div class="form-option">
                     <label class="label-form" for="happy"><i class="fa-regular fa-face-laugh-squint"></i></label>
                     <h4>Happy</h4>
-                    <input class="input-radio" id="happy" type="radio" name="mood[]" value="5"/>
+                    <input class="input-radio" id="happy" type="radio" name="mood[]" value="5"
+                           <?php if ($moods[0] == 5) : ?>checked<?php endif; ?>/>
                 </div>
             </div>
 
