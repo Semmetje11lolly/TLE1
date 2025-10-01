@@ -64,11 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!--animation-->
 
 
-    <div class="container-animation">
-        <div class="logo" id="animatedLogo">
-            <img src="img/logo.png" alt="Logo">
-        </div>
-    </div>
+<!--    <div class="container-animation">-->
+<!--        <div class="logo" id="animatedLogo">-->
+<!--            <img src="img/logo.png" alt="Logo">-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="login-container">
         <form method="post" action="login.php">
