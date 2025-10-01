@@ -138,10 +138,12 @@ section.alreadyFilled div.buttons {
     border-radius: 10px;
 }
 
-.insights-button {
+.insights-button, .diary-button {
     all: unset;
 
     padding: 10px 20px;
+
+    margin-bottom: 10px;
 
     background-color: var(--color-blue);
     border-radius: 10px;
