@@ -35,10 +35,11 @@ if (isset($_GET['json'])) {
 }
 // diary summary query
 $today = date('Y-m-d');
-$query = "SELECT `text` FROM diaries WHERE `date` = '$today'";
+$query = "SELECT `text`,`date` FROM diaries WHERE `date` = '$today'";
 $summaryResult = mysqli_query($db, $query);
 $summaryJSON = mysqli_fetch_assoc($summaryResult);
-$summaryText = json_decode($summaryJSON['text'], true);
+if (isset($summaryJSON)) $summaryText = json_decode($summaryJSON['text'], true);
+if (!isset($summaryJSON)) $summaryJSON['date'] = null;
 
 // all data query
 $query = "SELECT * FROM insights ORDER BY id DESC LIMIT 1";
@@ -87,7 +88,11 @@ mysqli_close($db);
         <canvas id="myChart" width="40" height="20"></canvas>
 
         <div class="feelings">
-            <h1>Today’s Feelings</h1>
+            <?php if ($summaryJSON['date'] == $today) : ?>
+                <h1>Today’s Feelings</h1>
+            <?php else : ?>
+                <h1>Yesterday's Feelings</h1>
+            <?php endif; ?>
             <p>
                 Bad habits: <?= $lastDiary['bad_habit'] ?><br>
                 Hobbies: <?= $lastDiary['hobbies'] ?><br>
@@ -103,11 +108,13 @@ mysqli_close($db);
 
 
     <section class="summary">
-        <h1>Today's Summary</h1>
+        <?php if ($summaryJSON['date'] == $today) : ?>
+            <h1>Today's Summary</h1>
 
-        <p>
-            <?= $summaryText['todaySummary'] ?>
-        </p>
+            <p>
+                <?= $summaryText['todaySummary'] ?>
+            </p>
+        <?php endif; ?>
     </section>
 
     <!--    <section class="last-week">-->
