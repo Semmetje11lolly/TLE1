@@ -65,7 +65,7 @@ class ConfigManager {
     }
 
     /**
-     * Load .env file into environment
+     * Load .env file into $_ENV superglobal (without using putenv)
      */
     private function loadEnvFile(string $path): void {
         $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -84,9 +84,9 @@ class ConfigManager {
                 // Remove quotes if present
                 $value = trim($value, '"\'');
 
-                // Set environment variable if not already set
-                if (!getenv($key)) {
-                    putenv("$key=$value");
+                // Set in $_ENV if not already set (avoid using putenv() which may be disabled)
+                if (!isset($_ENV[$key]) && !getenv($key)) {
+                    $_ENV[$key] = $value;
                 }
             }
         }
@@ -97,7 +97,7 @@ class ConfigManager {
      */
     private function validate(): void {
         if (empty($this->config['api_key'])) {
-            throw new Exception('OPENROUTER_API_KEY is required. Please set it in .env file or environment.');
+            throw new Exception('OPENROUTER_API_KEY is required. Please set it in includes/env.php file or environment.');
         }
 
         if (empty($this->config['model'])) {
